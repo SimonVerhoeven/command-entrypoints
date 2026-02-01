@@ -1,0 +1,23 @@
+= Command Runners in 2026 from a Java Engineer's Perspective
+Simon Verhoeven <verhoeven.simon@gmail.com>
+v1.0, 2026-02-01
+:doctype: article
+:encoding: utf-8
+:lang: en
+:toc: left
+:toclevels: 3
+:toc-title: Table of Contents
+:sectanchors:
+:sectlinks:
+:sectnums:
+:icons: font
+:source-highlighter: highlight.js
+:highlightjs-theme: a11y-dark
+:stem:
+:xrefstyle: short
+:experimental:
+:description: A comprehensive comparison of modern task runners (Make, Just, Task, JBang, Gradle) for Java developers, with practical examples and recommendations.
+:keywords: task runners, make, just, taskfile, jbang, gradle, java, devops, automation
+:copyright: Copyright (c) 2026 Simon Verhoeven
+:license: MIT License
+:license-url: https://opensource.org/licenses/MIT
