@@ -21,3 +21,8 @@ v1.0, 2026-02-01
 :copyright: Copyright (c) 2026 Simon Verhoeven
 :license: MIT License
 :license-url: https://opensource.org/licenses/MIT
+
+[abstract]
+--
+This article explores the landscape of task runners in 2026, comparing Make, Just, Task (Taskfile), JBang, and Gradle from a senior Java engineer's perspective. It covers the why, what, and how of task automation, with real-world scenarios, performance comparisons, and practical recommendations for choosing the right tool for your project.
+--
