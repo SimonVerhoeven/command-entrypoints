@@ -1,4 +1,4 @@
-= Command Runners in 2026 from a Java Engineer's Perspective
+= Command Runners in 2026
 Simon Verhoeven <verhoeven.simon@gmail.com>
 v1.0, 2026-02-01
 :doctype: article
@@ -26,3 +26,36 @@ v1.0, 2026-02-01
 --
 This article explores the landscape of task runners in 2026, comparing Make, Just, Task (Taskfile), JBang, and Gradle from a senior Java engineer's perspective. It covers the why, what, and how of task automation, with real-world scenarios, performance comparisons, and practical recommendations for choosing the right tool for your project.
 --
+== Why Use a Task Runner at All?
+
+Imagine a new developer joins your Spring Boot microservices project.  +
+To get started locally, they need to:
+
+. Run `docker-compose up` to start infrastructure (Postgres, Redis, Kafka)
+. Wait for services to be ready
+. Run database migrations
+. Generate jOOQ classes from the database schema
+. Generate API client code from OpenAPI specs
+. Start the application with the correct profile
+. Optionally seed test data
+
+Without a task runner, this knowledge might live in `README` files, wiki pages, senior developers' heads, or scattered shell scripts.  +
+The new developer wastes days piecing together "how do I actually run this thing?"
+
+=== The Problem: Developer Cognitive Load
+
+*Without a task runner*, onboarding involves:
+
+* Reading through `README` files, hoping they're up-to-date
+* Discovering hidden dependencies through trial and error
+* Debugging Docker Compose configuration issues
+* Asking teammates, "How do I actually run this?"
+* Wrestling with inconsistent script locations and naming
+* Manually coordinating the startup sequence of multiple services
+* Troubleshooting environment-specific issues that "work on my machine"
+
+*With a task runner*, the friction disappears:
+
+* Run `just --list` to see all available operations
+* Run `just dev`, and everything starts in the correct order
+* Start exploring the running application
