@@ -59,3 +59,20 @@ The new developer wastes days piecing together "how do I actually run this thing
 * Run `just --list` to see all available operations
 * Run `just dev`, and everything starts in the correct order
 * Start exploring the running application
+
+== References
+
+=== Demo Repository
+
+This article is accompanied by a practical demonstration repository containing working examples of all the task runners discussed:
+
+* https://github.com/SimonVerhoeven/command-entrypoints[command-entrypoints on GitHub] - Working examples of Make, Just, Task, JBang, and Gradle task runners
+
+=== Official Websites
+
+* https://www.gnu.org/software/make/[GNU Make]
+* https://just.systems/[Just - A Command Runner]
+* https://taskfile.dev/[Task - A Task Runner / Build Tool]
+* https://www.jbang.dev/[JBang - Scripting for Java]
+* https://gradle.org/[Gradle Build Tool]
+* https://picocli.info/[Picocli - A Mighty Tiny Command Line Interface]
