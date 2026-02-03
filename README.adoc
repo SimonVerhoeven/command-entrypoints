@@ -17,16 +17,16 @@ v1.0, 2026-02-01
 :xrefstyle: short
 :experimental:
 :description: A comprehensive comparison of modern task runners (Make, Just, Task, JBang, Gradle) for Java developers, with practical examples and recommendations.
-:keywords: task runners, make, just, taskfile, jbang, gradle, java, devops, automation
+:keywords: command runners, make, just, taskfile, jbang, gradle, java, devops, automation
 :copyright: Copyright (c) 2026 Simon Verhoeven
 :license: MIT License
 :license-url: https://opensource.org/licenses/MIT
 
 [abstract]
 --
-This article explores the landscape of task runners in 2026, comparing Make, Just, Task (Taskfile), JBang, and Gradle from a senior Java engineer's perspective. It covers the why, what, and how of task automation, with real-world scenarios, performance comparisons, and practical recommendations for choosing the right tool for your project.
+This article explores the landscape of command runners in 2026, comparing Make, Just, Task (Taskfile), JBang, and Gradle from a senior Java engineer's perspective. It covers the why, what, and how of command automation, with real-world scenarios, performance comparisons, and practical recommendations for choosing the right tool for your project.
 --
-== Why Use a Task Runner at All?
+== Why use a command runner at all?
 
 Imagine a new developer joins your Spring Boot microservices project.  +
 To get started locally, they need to:
@@ -39,12 +39,12 @@ To get started locally, they need to:
 . Start the application with the correct profile
 . Optionally seed test data
 
-Without a task runner, this knowledge might live in `README` files, wiki pages, senior developers' heads, or scattered shell scripts.  +
+Without a command runner, this knowledge might live in `README` files, wiki pages, senior developers' heads, or scattered shell scripts.  +
 The new developer wastes days piecing together "how do I actually run this thing?"
 
-=== The Problem: Developer Cognitive Load
+=== The problem: developer cognitive load
 
-*Without a task runner*, onboarding involves:
+*Without a command runner*, onboarding involves:
 
 * Reading through `README` files, hoping they're up-to-date
 * Discovering hidden dependencies through trial and error
@@ -54,21 +54,57 @@ The new developer wastes days piecing together "how do I actually run this thing
 * Manually coordinating the startup sequence of multiple services
 * Troubleshooting environment-specific issues that "work on my machine"
 
-*With a task runner*, the friction disappears:
+*With a command runner*, the friction disappears:
 
 * Run `just --list` to see all available operations
 * Run `just dev`, and everything starts in the correct order
 * Start exploring the running application
 
+=== The Solution: A single, discoverable entry point
+
+A command runner provides a *self-documenting interface* to your project's operations:
+
+[source,bash]
+----
+$ just --list
+Available recipes:
+    clean              # Clean build artifacts
+    test               # Run all tests
+    dev                # Start local development environment
+    db-migrate DB      # Run database migrations
+    db-seed DB         # Seed database with test data
+    generate           # Generate code (jOOQ, OpenAPI clients)
+    deploy ENV         # Deploy to environment (dev, staging, prod)
+----
+
+Now the new developer knows exactly what's possible and how to do it.  +
+No hunting through documentation, no asking teammates basic questions, no tribal knowledge required.
+
+=== The "Command Runner" mental model
+
+Think of command runners as the *friendly interface* to your project. +
+They don't replace your other tools—they *orchestrate* them:
+
+----
+Developer → command Runner → Build Tools (Gradle/Maven)
+                           → Containers (Docker/Docker Compose)
+                           → Databases (Flyway/Liquibase)
+                           → Infrastructure (Terraform/kubectl)
+                           → Custom Scripts
+----
+
+Modern projects use diverse tooling across different domains.  +
+A command runner provides a consistent interface with clear documentation, dependency management, parameter handling, and cross-platform compatibility.
+
 == References
 
-=== Demo Repository
+=== Demo repository
 
-This article is accompanied by a practical demonstration repository containing working examples of all the task runners discussed:
+This article is accompanied by a practical demonstration repository containing working examples of all the command runners discussed:
 
-* https://github.com/SimonVerhoeven/command-entrypoints[command-entrypoints on GitHub] - Working examples of Make, Just, Task, JBang, and Gradle task runners
+* https://github.com/SimonVerhoeven/command-entrypoints[command-entrypoints on GitHub] - Working examples of Make, Just, Task, JBang, and Gradle command runners
 
-=== Official Websites
+=== Official websites
 
 * https://www.gnu.org/software/make/[GNU Make]
 * https://just.systems/[Just - A Command Runner]
