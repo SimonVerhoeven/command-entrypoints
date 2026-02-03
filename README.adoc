@@ -96,6 +96,34 @@ Developer → command Runner → Build Tools (Gradle/Maven)
 Modern projects use diverse tooling across different domains.  +
 A command runner provides a consistent interface with clear documentation, dependency management, parameter handling, and cross-platform compatibility.
 
+=== What about just using Shell scripts?
+
+Raw shell scripts in a `scripts/` directory seem simple, but they have significant drawbacks:
+
+* There's no discoverability. How do you know what scripts exist? 
+* Each script needs its own `--help` documentation. 
+* Expressing dependencies between scripts can be a hassle. 
+* Parameter handling is inconsistent.
+* Shell scripts don't run natively on all platforms. 
+* Each script becomes a standalone item, and changes often don't cascade.
+
+Command runners solve these problems with:
+
+* built-in discovery (`just --list`).
+* consistent parameter handling 
+* clear dependency syntax (`task-b: task-a`)
+* cross-platform support, and centralised maintenance in one or a few well-known files.
+
+=== What about just using your build tool?
+
+Build tools _can_ run arbitrary tasks, but they have significant overhead:
+
+* Startup time ranges from 1-3 seconds, even for "simple" tasks
+* Too much ceremony for simple operations
+* Build files can become cluttered with unrelated tasks
+* Often awkward for tasks outside their primary domain
+* Require a different mental model than "run a command"
+
 == References
 
 === Demo repository
