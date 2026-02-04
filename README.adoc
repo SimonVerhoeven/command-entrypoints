@@ -168,6 +168,41 @@ Build tools and command runners serve different purposes, and understanding when
 * Simplicity and discoverability matter
 * Working with non-developers who need to run standardised workflows
 
+=== Real-World benefits
+
+Command runners reduce friction across multiple dimensions:
+
+*Standardising workflows*: they ensure consistency across your team:
+
+* Everyone uses the same commands instead of developer-specific approaches
+* Important steps can't be accidentally skipped
+* Environments remain consistent across machines
+* Best practices are encoded in tasks
+* Onboarding becomes faster
+* Tribal knowledge is captured in executable form
+
+*Reducing context switching*: Developers don't need to remember whether to use `npm run`, `./gradlew`, `docker-compose`, or a custom script. One consistent interface (`just <task>` or `task <task>`) reduces cognitive load and keeps you in the flow.
+
+*CI/CD integration*: Your CI/CD pipeline can use the same commands as local development, ensuring parity between environments. If it works locally, it works in CI:
+
+[source,yaml]
+----
+# .github/workflows/ci.yml
+jobs:
+  test:
+    steps:
+      - run: just test-all
+  deploy:
+    steps:
+      - run: just deploy staging
+----
+
+*Documentation that stays current*: README files tend to get outdated as soon as they have been written, but a `justfile` is executable documentation. If the task doesn't work, it gets fixed immediately because it blocks actual work.
+
+*Enabling the team*: Product managers can trigger demo environment setups, QA can reset test databases, or support teams can generate diagnostic reports. All this without deep technical knowledge.
+
+*Project-specific automation*: Every project has unique tasks such as batch jobs, maintenance operations, reports, and troubleshooting. These do not belong in your build tool, but they need to be runnable and documented. Command runners provide a home for these one-off but important operations.
+
 == References
 
 === Demo repository
