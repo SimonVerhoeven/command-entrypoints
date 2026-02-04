@@ -174,7 +174,7 @@ Build tools and command runners serve different purposes, and understanding when
 
 This article is accompanied by a practical demonstration repository containing working examples of all the command runners discussed:
 
-* https://github.com/SimonVerhoeven/command-entrypoints[command-entrypoints on GitHub] - Working examples of Make, Just, Task, JBang, and Gradle command runners
+* https://github.com/SimonVerhoeven/command-entrypoints[command-entrypoints] - Working examples of Make, Just, Task, JBang, and Gradle command runners
 
 === Official websites
 
