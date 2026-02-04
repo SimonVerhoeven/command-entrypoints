@@ -146,7 +146,7 @@ Build tools and command runners serve different purposes, and understanding when
 
 *The hybrid approach works best*: Use your build tool for what it does well (building and testing), and use a command runner to orchestrate everything else.
 
-** Command runners aren't just for developers*: 
+*Command runners aren't just for developers:*
 
 * Data analysts might use them to orchestrate Excel spreadsheet processing, data transformations, or report generation
 * DevOps teams use them to provision infrastructure
