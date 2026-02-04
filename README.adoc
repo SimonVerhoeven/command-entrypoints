@@ -124,6 +124,50 @@ Build tools _can_ run arbitrary tasks, but they have significant overhead:
 * Often awkward for tasks outside their primary domain
 * Require a different mental model than "run a command"
 
+== Build tools versus command runners: different tools for different jobs
+
+Build tools and command runners serve different purposes, and understanding when to use each is key to an efficient workflow.
+
+*Build tools* (Maven, Gradle, Cargo, dotnet CLI) are specialised for:
+
+* Compiling source code
+* Managing dependencies
+* Running tests tightly coupled to the build
+* Packaging applications
+* Publishing artifacts
+
+*Command runners* (Just, Task, Make) excel at:
+
+* Orchestrating multiple external tools
+* Setting up and tearing down development environments
+* Running tasks unrelated to building (deployment, database operations, data processing)
+* Providing a discoverable interface to project operations
+* Simple, fast task execution without build tool overhead
+
+*The hybrid approach works best*: Use your build tool for what it does well (building and testing), and use a command runner to orchestrate everything else.
+
+** Command runners aren't just for developers*: 
+
+* Data analysts might use them to orchestrate Excel spreadsheet processing, data transformations, or report generation
+* DevOps teams use them to provision infrastructure
+* Technical writers might use them for documentation builds and publishing workflows
+* Anyone who needs to automate sequences of commands benefits from the discoverability and consistency that command runners provide.
+
+*Use build tools for tasks when:*
+
+* Tasks are tightly coupled to the build (running tests, packaging)
+* You want to minimise tooling in your stack
+* Tasks benefit from your build tool's incremental build features
+
+*Use dedicated command runners when:*
+
+* Orchestrating multiple external tools
+* Setting up and tearing down environments
+* Running tasks unrelated to building (deployment, data operations)
+* Startup time matters
+* Simplicity and discoverability matter
+* Working with non-developers who need to run standardised workflows
+
 == References
 
 === Demo repository
