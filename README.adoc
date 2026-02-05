@@ -229,6 +229,52 @@ Additionally, *JShell*, *npm scripts*, and *Maven exec* will be briefly covered 
 
 '''
 
+== Syntax and Developer Experience
+
+=== Make
+
+[source,makefile]
+----
+.PHONY: clean test deploy
+
+# Variables must be set like this
+ENVIRONMENT ?= dev
+
+clean:
+	@echo "Cleaning build artifacts"
+	./gradlew clean
+	rm -rf build/
+
+test:
+	@echo "Running tests"
+	./gradlew test
+
+# Rerun deploy if the deploy script changes
+deploy: test ./scripts/deploy.sh
+	@echo "Deploying to $(ENVIRONMENT)"
+	./scripts/deploy.sh $(ENVIRONMENT)
+
+# Parameters must be passed as environment variables
+integration-test:
+	@echo "Running integration tests against $(SERVICE)"
+	./gradlew :$(SERVICE):integrationTest
+----
+
+*Pros:*
+
+* ✅ Universal: every Unix system has it
+* ✅ Widely known in the software engineering community
+* ✅ Simple for basic tasks
+* ✅ File dependency tracking (it can trigger task reruns when script files change, though this is less critical for most command-running scenarios)
+
+*Cons:*
+
+* ❌ *Tabs vs. spaces*: Strict tab requirement for command lines can cause syntax errors
+* ❌ *Parameter passing*: Relies on environment variables rather than function-style parameters
+* ❌ *Platform dependency*: Windows requires additional tooling (WSL, Cygwin, or GNU Make for Windows)
+* ❌ *Error messages*: Can be difficult to interpret for newcomers
+* ❌ *Syntax*: Special characters (`@`, `$`, `$@`, `$<`) and escaping rules have a learning curve
+
 == References
 
 === Demo repository
