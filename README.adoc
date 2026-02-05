@@ -203,7 +203,7 @@ jobs:
 
 *Project-specific automation*: Every project has unique tasks such as batch jobs, maintenance operations, reports, and troubleshooting. These do not belong in your build tool, but they need to be runnable and documented. Command runners provide a home for these one-off but important operations.
 
-== Historical context: from C build 4ool to command runners
+== Historical context: from C build tool to command runners
 
 Now that we understand _why_ we need command runners, let's look at where they came from.
 
