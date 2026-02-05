@@ -229,7 +229,7 @@ Additionally, *JShell*, *npm scripts*, and *Maven exec* will be briefly covered 
 
 '''
 
-== Syntax and Developer Experience
+== Syntax and developer experience
 
 === Make
 
