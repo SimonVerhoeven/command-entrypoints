@@ -215,6 +215,20 @@ This created space for a new generation of *purpose-built command runners*. *Jus
 
 '''
 
+== The contenders
+
+This comparison focuses on the most relevant options for Java development environments:
+
+. *Make* - A build automation tool with widespread adoption for command running
+. *Just* - Purpose-built command runner with modern syntax
+. *Task (Taskfile)* - YAML-based task runner built with Go
+. *JBang* - Java-based scripting tool for task automation
+. *Gradle* - Build automation system with extensible task support
+
+Additionally, *JShell*, *npm scripts*, and *Maven exec* will be briefly covered as they are sometimes used for similar purposes.
+
+'''
+
 == References
 
 === Demo repository
