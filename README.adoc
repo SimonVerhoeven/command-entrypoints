@@ -275,6 +275,56 @@ integration-test:
 * ❌ *Error messages*: Can be difficult to interpret for newcomers
 * ❌ *Syntax*: Special characters (`@`, `$`, `$@`, `$<`) and escaping rules have a learning curve
 
+=== Just
+
+[source,just]
+----
+# justfile
+
+# Set default environment
+environment := env_var_or_default('ENVIRONMENT', 'dev')
+service := env_var('SERVICE')
+
+# Clean build artifacts
+clean:
+    echo "Cleaning build artifacts"
+    ./gradlew clean
+    rm -rf build/
+
+# Run tests
+test:
+    echo "Running tests"
+    ./gradlew test
+
+# Deploy to environment (defaults to dev)
+# Rerun deploy if the deploy script changes
+deploy env=environment: test ./scripts/deploy.sh
+    echo "Deploying to {{env}}"
+    ./scripts/deploy.sh {{env}}
+
+# Run integration tests for a specific service
+# SERVICE must be set in the environment
+integration-test:
+    echo "Running integration tests against {{service}}"
+    ./gradlew :{{service}}:integrationTest
+----
+
+*Pros:*
+
+* ✅ *Modern syntax*: No tab requirements, spaces work naturally
+* ✅ *Parameters*: Function-style parameters with default values
+* ✅ *Error messages*: Clear and actionable feedback
+* ✅ *Cross-platform*: Single binary works on Windows, macOS, Linux
+* ✅ *Variables*: Straightforward `{{variable}}` interpolation syntax
+* ✅ *Listing*: Built-in `just --list` shows all available tasks
+
+*Cons:*
+
+* ❌ *Installation required*: It's not available by default; it needs a separate installation
+* ❌ *No file dependencies*: Always executes tasks without checking file timestamps (though Task addresses this if needed)
+* ❌ *Smaller ecosystem*: Fewer online examples and community resources than Make
+* ❌ *Additional tool*: Adds another dependency to your project
+
 == References
 
 === Demo repository
