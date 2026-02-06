@@ -325,6 +325,80 @@ integration-test:
 * ❌ *Smaller ecosystem*: Fewer online examples and community resources than Make
 * ❌ *Additional tool*: Adds another dependency to your project
 
+=== Task (Taskfile)
+
+[source,yaml]
+----
+# Taskfile.yml
+version: '3'
+
+vars:
+  ENVIRONMENT: '{{.ENVIRONMENT | default "dev"}}'
+  GRADLE: ./gradlew
+
+tasks:
+  clean:
+    desc: Clean build artifacts
+    cmds:
+      - echo "Cleaning build artifacts"
+      - '{{.GRADLE}} clean'
+      - rm -rf build/
+
+  test:
+    desc: Run tests
+    cmds:
+      - echo "Running tests"
+      - '{{.GRADLE}} test'
+
+  deploy:
+    desc: Deploy to environment
+    deps: [test]
+    vars:
+      ENV: '{{.ENV | default .ENVIRONMENT}}'
+    # Only redeploy if script changes
+    sources:
+      - ./scripts/deploy.sh
+    cmds:
+      - echo "Deploying to {{.ENV}}"
+      - ./scripts/deploy.sh {{.ENV}}
+
+  integration-test:
+    desc: Run integration tests for a service
+    requires:
+      vars: [SERVICE]
+    cmds:
+      - echo "Running integration tests for {{.SERVICE}}"
+      - '{{.GRADLE}} :{{.SERVICE}}:integrationTest'
+
+  dev:
+    desc: Start local development environment
+    deps: [clean]
+    cmds:
+      - docker-compose up -d postgres redis
+      - '{{.GRADLE}} bootRun'
+
+  default:
+    desc: List all available tasks
+    cmds:
+      - task --list
+----
+
+*Pros:*
+
+* ✅ *YAML-based*: A familiar format for most developers
+* ✅ *Rich features*: File watching, status checks, includes, and more
+* ✅ *Cross-platform*: Handles shell differences across operating systems
+* ✅ *File dependencies*: Can check file timestamps and skip tasks when sources haven't changed
+* ✅ *Good documentation*: Well-maintained with clear examples
+* ✅ *Powerful*: Variables, templating, dynamic tasks
+
+*Cons:*
+
+* ❌ *YAML verbosity*: More structure required compared to Just for simple tasks
+* ❌ *Installation required*: A separate binary installation needed
+* ❌ *YAML challenges*: Indentation and quoting can be error-prone
+* ❌ *Complexity*: Feature-rich nature may be more than needed for simple projects
+
 == References
 
 === Demo repository
