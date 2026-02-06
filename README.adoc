@@ -507,6 +507,105 @@ tasks.register("integration-test") {
 
 '''
 
+=== JShell
+
+JShell is Java's REPL (introduced in Java 9). While primarily designed for interactive Java exploration, it can also be used for scripting.
+
+[source,java]
+----
+// tasks.jsh
+import java.nio.file.*;
+import java.io.IOException;
+
+String envOrDefault(String name, String defaultValue) {
+    String value = System.getenv(name);
+    return (value == null || value.isBlank()) ? defaultValue : value;
+}
+
+String envRequired(String name) {
+    String value = System.getenv(name);
+    if (value == null || value.isBlank()) {
+        throw new IllegalArgumentException("Missing required environment variable: " + name);
+    }
+    return value;
+}
+
+int run(String... command) throws Exception {
+    return new ProcessBuilder(command)
+        .inheritIO()
+        .start()
+        .waitFor();
+}
+
+void deleteDir(Path dir) throws IOException {
+    if (!Files.exists(dir)) return;
+    try (var walk = Files.walk(dir)) {
+        walk.sorted((a, b) -> b.compareTo(a))
+            .forEach(path -> {
+                try { Files.deleteIfExists(path); }
+                catch (IOException e) { throw new RuntimeException(e); }
+            });
+    }
+}
+
+void clean() throws Exception {
+    System.out.println("Cleaning build artifacts");
+    run("./gradlew", "clean");
+    deleteDir(Paths.get("build"));
+}
+
+int test() throws Exception {
+    System.out.println("Running tests");
+    return run("./gradlew", "test");
+}
+
+int deploy() throws Exception {
+    String environment = envOrDefault("ENVIRONMENT", "dev");
+    System.out.println("Deploying to " + environment);
+
+    if (test() != 0) {
+        System.err.println("Tests failed, aborting deployment");
+        return 1;
+    }
+    return run("./scripts/deploy.sh", environment);
+}
+
+int integrationTest() throws Exception {
+    String service = envRequired("SERVICE");
+    System.out.println("Running integration tests against " + service);
+    return run("./gradlew", ":" + service + ":integrationTest");
+}
+
+int dev() throws Exception {
+    clean();
+    run("docker-compose", "up", "-
+----
+
+Usage:
+[source,bash]
+----
+jshell tasks.jsh
+jshell> clean()
+jshell> deploy("staging")
+----
+
+*Pros:*
+
+* ✅ Pure Java: Uses standard JDK APIs; no extra dependencies
+* ✅ Scriptable: Easy to tweak and run ad‑hoc commands interactively
+* ✅ Portable: Works anywhere a JDK is available (no extra tooling)
+* ✅ Immediate feedback: REPL makes iterating on tasks fast
+
+*Cons:*
+
+* ❌ No task graph: No built‑in dependencies or incremental task tracking
+* ❌ No file inputs/outputs: Must implement change detection manually
+* ❌ Limited IDE support: Less tooling support than Gradle/Kotlin DSL
+* ❌ Manual invocation: Users must remember to call functions in the REPL
+* ❌ Not designed for automation: Primarily a REPL, not a task runner
+
+'''
+
 == References
 
 === Demo repository
