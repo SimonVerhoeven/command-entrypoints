@@ -231,6 +231,23 @@ Additionally, *JShell*, *npm scripts*, and *Maven exec* will be briefly covered 
 
 == Syntax and developer experience
 
+The choice of a command runner often comes down to developer experience: how intuitive the syntax is, how quickly you can get started, and how easy it is to maintain over time. In this section, we'll examine the syntax and practical usability of each tool through equivalent examples. 
+
+Each example implements the same set of commands:
+
+* cleaning build artifacts
+* running tests
+* deploying to environments
+* running integration tests
+
+So that we can compare the approaches directly, and see how each tool handles:
+
+* Variable declarations and interpolation
+* Parameter passing and default values
+* Task dependencies
+* Cross-platform compatibility
+* Error messages and discoverability
+
 === Make
 
 [source,makefile]
