@@ -399,6 +399,42 @@ tasks:
 * ❌ *YAML challenges*: Indentation and quoting can be error-prone
 * ❌ *Complexity*: Feature-rich nature may be more than needed for simple projects
 
+=== JBang
+
+[source,java]
+----
+<!-- Source: https://mvnrepository.com/artifact/info.picocli/picocli -->
+<dependency>
+    <groupId>info.picocli</groupId>
+    <artifactId>picocli</artifactId>
+    <version>4.7.7</version>
+    <scope>compile</scope>
+</dependency>
+----
+
+*Pros:*
+
+* ✅ *Pure Java*: Leverage existing Java knowledge and skills
+* ✅ *No build tool required*: JBang handles compilation and dependency management
+* ✅ *Dependency management*: Declare dependencies inline with `//DEPS`
+* ✅ *CLI frameworks*: Integrate with Picocli for sophisticated command-line interfaces
+* ✅ *Type safety*: Compile-time checking and IDE refactoring support
+* ✅ *IDE support*: Full autocomplete and debugging capabilities
+* ✅ *Cross-platform*: JVM ensures consistent behaviour across operating systems
+* ✅ *Access to ecosystem*: Use any Java library
+* ✅ *Debugging*: Can attach a debugger to running scripts
+* ✅ *Testing*: Write unit tests for task logic
+
+*Cons:*
+
+* ❌ *Installation required*: JBang needs to be installed separately
+* ❌ *Verbosity*: More code required compared to shell-based alternatives for simple tasks
+* ❌ *Startup time*: JVM startup adds 200-800ms overhead (cached after first run)
+* ❌ *Learning curve*: Requires familiarity with CLI frameworks like Picocli
+* ❌ *More ceremony*: Additional boilerplate for simple command execution
+* ❌ *Heavyweight for simple tasks*: Full programming language may be excessive for basic orchestration
+* ❌ *No built-in file watching*: Would need to implement manually if tracking file changes is needed
+
 == References
 
 === Demo repository
