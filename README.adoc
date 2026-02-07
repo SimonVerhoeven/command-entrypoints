@@ -26,6 +26,15 @@ v1.0, 2026-02-01
 --
 This article explores the landscape of command runners in 2026, comparing Make, Just, Task (Taskfile), JBang, and Gradle from a senior Java engineer's perspective. It covers the why, what, and how of command automation, with real-world scenarios, performance comparisons, and practical recommendations for choosing the right tool for your project.
 --
+
+toc::[]
+
+'''
+
+Every development team faces the same challenge: *How do we make our projects easy to work with?* Whether you're onboarding a new engineer, setting up CI/CD pipelines, or just trying to remember how to run integration tests after a week away from a project, the cognitive load adds up. Command runners provide a solution by offering a consistent, self-documenting interface to all your project's operations.
+
+In this article, we'll explore why command runners matter, trace their evolution from Make to modern alternatives, and provide practical guidance on choosing and implementing the right tool for your projects.
+
 == Why use a command runner at all?
 
 Imagine a new developer joins your Spring Boot microservices project.  +
