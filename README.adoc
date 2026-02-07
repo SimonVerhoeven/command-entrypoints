@@ -320,13 +320,6 @@ scoop install jbang
 sdk install jbang
 ----
 
-=== JShell
-
-*All platforms*: Pre-installed with JDK 9 and later
-
-No separate installation is needed; you merely need to ensure that you have JDK 9+ installed and run `jshell` from the command line.
-
-
 === Gradle
 
 *If not already in your project*:
@@ -342,6 +335,13 @@ No separate installation is needed; you merely need to ensure that you have JDK 
 ----
 sdk install gradle
 ----
+
+=== JShell
+
+*All platforms*: Pre-installed with JDK 9 and later
+
+No separate installation is needed; you merely need to ensure that you have JDK 9+ installed and run `jshell` from the command line.
+
 
 *Note*: Many Java projects use the Gradle Wrapper (`gradlew`/`gradlew.bat`), which requires no separate installation.
 
@@ -466,7 +466,7 @@ integration-test:
 * ❌ *Smaller ecosystem*: Fewer online examples and community resources than Make
 * ❌ *Additional tool*: Adds another dependency to your project
 
-=== Task (Taskfile)
+=== Task
 
 Task sits somewhere between a lightweight runner and a workflow engine: it keeps a simple mental model, but adds practical features for larger task suites (descriptions, structured variables, includes, and skipping work when inputs haven't changed). If your team already lives in YAML for CI and infrastructure, Task often feels like a natural extension.
 
