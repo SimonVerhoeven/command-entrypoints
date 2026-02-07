@@ -248,7 +248,11 @@ So that we can compare the approaches directly, and see how each tool handles:
 * Cross-platform compatibility
 * Error messages and discoverability
 
+A useful way to read the examples is to separate *what you can express* from *how it feels to maintain*. Most tools can run the same underlying commands, and the differences show up in how discoverable tasks are for new joiners, how parameters are passed, how dependencies are modelled, and how much syntax you have to carry around as the task set grows.
+
 === Make
+
+Make is the historical baseline: a build tool by origin, but still widely used as a general-purpose entry point because it's available on all Unix-like systems and "good enough" for many teams. In this comparison, please treat it as the reference point for trade-offs: powerful and familiar, but with older ergonomics (tabs, escaping rules, and environment-variable-driven parameters).
 
 [source,makefile]
 ----
@@ -293,6 +297,8 @@ integration-test:
 * ❌ *Syntax*: Special characters (`@`, `$`, `$@`, `$<`) and escaping rules have a learning curve
 
 === Just
+
+Just is a purpose-built command runner that optimises for readability and a smooth day-to-day developer experience. It's a good fit when you want a small, fast, self-documenting "front door" to a project, without dragging operational concerns into your build tool.
 
 [source,just]
 ----
@@ -343,6 +349,8 @@ integration-test:
 * ❌ *Additional tool*: Adds another dependency to your project
 
 === Task (Taskfile)
+
+Task sits somewhere between a lightweight runner and a workflow engine: it keeps a simple mental model, but adds practical features for larger task suites (descriptions, structured variables, includes, and skipping work when inputs haven't changed). If your team already lives in YAML for CI and infrastructure, Task often feels like a natural extension.
 
 [source,yaml]
 ----
@@ -418,6 +426,8 @@ tasks:
 
 === JBang
 
+JBang is a different kind of solution: instead of declaring tasks in a DSL, you're writing Java (or Java-adjacent) code that runs like a script. This becomes attractive when tasks stop being pure orchestration and start needing real logic, libraries, tests, and a polished CLI. This does come at the cost of more ceremony and JVM startup overhead.
+
 [source,java]
 ----
 <!-- Source: https://mvnrepository.com/artifact/info.picocli/picocli -->
@@ -453,6 +463,8 @@ tasks:
 * ❌ *No built-in file watching*: Would need to implement manually if tracking file changes is needed
 
 === Gradle
+
+Gradle can act as a command entrypoint, especially in Java projects where it's often used. The trade-off is that you're running a build system to do non-build actions: you gain IDE support and incremental tracking, but you also pay configuration/startup overhead, and you risk turning the build into a grab-bag of operational workflows.
 
 [source,kotlin]
 ----
@@ -526,7 +538,7 @@ tasks.register("integration-test") {
 
 === JShell
 
-JShell is Java's REPL (introduced in Java 9). While primarily designed for interactive Java exploration, it can also be used for scripting.
+JShell is Java's REPL (introduced in Java 9). It's not a task runner, but it can be a surprisingly effective "zero extra tooling" option when you want to script with plain JDK APIs and iterate interactively.
 
 [source,java]
 ----
