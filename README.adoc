@@ -635,6 +635,36 @@ jshell> deploy("staging")
 
 '''
 
+== Cross-platform compatibility
+
+As a software engineer, you'll likely work with teams where members use different operating systems. 
+Cross-platform compatibility and ease of setup across different environments are important considerations when choosing a command runner.
+
+
+[cols="1,3"]
+|===
+|Tool |Cross-Platform Support
+
+|*Make*
+|❌ Requires additional setup on Windows (WSL, Cygwin, or GNU Make for Windows)
+
+|*Just*
+|✅ Single binary, works identically on all platforms
+
+|*Task*
+|✅ Excellent support; written in Go, compiles to single binary, handles shell differences gracefully
+
+|*JBang*
+|✅ Java's "write once, run anywhere" promise (requires JDK)
+
+|*Gradle*
+|✅ Cross-platform by design (requires JVM)
+|===
+
+*Winner*: Task and Just tie here, with a slight edge to Task for its more robust shell handling.
+
+'''
+
 == References
 
 === Demo repository
