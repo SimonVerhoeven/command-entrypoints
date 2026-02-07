@@ -177,7 +177,55 @@ Build tools and command runners serve different purposes, and understanding when
 * Simplicity and discoverability matter
 * Working with non-developers who need to run standardised workflows
 
-=== Real-World benefits
+== Hybrid approach: the best of both worlds
+
+The beauty is that you don't have to choose just one tool. In practice, many successful teams combine command runners to leverage their respective strengths. We can use a lightweight command runner such as Just or Task as the primary interface, while delegating complex logic to JBang or similar tools in your language ecosystem.
+
+This approach gives you the best of both worlds: simple, readable task definitions for everyday operations, and the full power of your favourite, well-known programming language when you need it. Your `justfile` or `Taskfile.yml` remains clean and approachable, while complex tasks benefit from type safety, testing, and proper error handling.
+
+We could, for example, do the following:
+
+*justfile*:
+[source,just]
+----
+# Simple task orchestration
+clean:
+    ./gradlew clean
+
+test:
+    ./gradlew test
+
+# Complex tasks delegate to JBang
+db-clone env:
+    ./scripts/db-tasks.java clone-{{env}}
+
+data-migration source target:
+    ./scripts/data-migration.java --source {{source}} --target {{target}}
+
+generate-test-data count:
+    ./scripts/generate-data.java --records {{count}}
+
+# Best of both worlds: Just orchestrates, JBang handles complexity
+setup-local: clean
+    docker-compose up -d
+    ./scripts/db-tasks.java migrate
+    ./scripts/generate-data.java --records 1000
+    ./gradlew bootRun
+----
+
+This gives you:
+
+* ✅ Simple, readable task definitions in Just
+* ✅ Complex logic in type-safe, testable JBang scripts
+* ✅ Clear separation of concerns
+* ✅ Easy discoverability (`just --list` shows everything)
+* ✅ The right tool for each type of task
+
+The key is to keep clear boundaries: use your command runner for orchestration and simple operations, and delegate the rest to programming languages, such as when tasks require conditional logic, error handling, or specific libraries.
+
+'''
+
+== Real-World benefits
 
 Command runners reduce friction across multiple dimensions:
 
