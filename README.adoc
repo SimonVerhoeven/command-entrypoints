@@ -665,6 +665,45 @@ Cross-platform compatibility and ease of setup across different environments are
 
 '''
 
+== Team adoption and maintainability
+
+Beyond technical capabilities, the success of a command runner depends on how easily your team can adopt and maintain it. Consider the learning curve for new team members, the installation overhead, and the long-term maintainability of your task definitions.
+
+*Make*:
+
+* ✅ Widely known across the industry
+* ✅ No installation needed on Unix systems
+* ❌ Tab sensitivity may cause errors, especially when initially starting
+* ❌ Syntax can be challenging for newcomers
+
+*Just*:
+
+* ✅ Easy to learn in 10 minutes
+* ✅ Self-documenting with `--list`
+* ❌ Requires installation and buy-in
+* ❌ Less familiar to teams coming from traditional tooling
+
+*Task*:
+
+* ✅ YAML is familiar to most developers
+* ✅ Good documentation and examples
+* ❌ YAML can become verbose for simple tasks
+* ❌ Additional tool to install and maintain
+
+*JBang*:
+
+* ✅ Leverages existing language knowledge (Java)
+* ✅ Can write tests for complex task logic
+* ❌ Higher barrier to entry than shell-based runners
+* ❌ Requires understanding of CLI frameworks for best results
+
+*Gradle*:
+
+* ✅ No additional installation if already using Gradle
+* ✅ Many teams are already familiar with the syntax and tooling
+* ❌ Tasks mixed with build configuration can reduce clarity
+* ❌ May encourage over-engineering simple operations
+
 == References
 
 === Demo repository
