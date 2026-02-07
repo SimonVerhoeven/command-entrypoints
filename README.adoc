@@ -16,7 +16,7 @@ v1.0, 2026-02-01
 :stem:
 :xrefstyle: short
 :experimental:
-:description: A comprehensive comparison of modern task runners (Make, Just, Task, JBang, Gradle) for Java developers, with practical examples and recommendations.
+:description: A comprehensive comparison of modern command runners (Make, Just, Task, JBang, Gradle) for Java developers, with practical examples and recommendations.
 :keywords: command runners, make, just, taskfile, jbang, gradle, java, devops, automation
 :copyright: Copyright (c) 2026 Simon Verhoeven
 :license: MIT License
@@ -206,7 +206,7 @@ jobs:
       - run: just deploy staging
 ----
 
-*Documentation that stays current*: README files tend to get outdated as soon as they have been written, but a `justfile` is executable documentation. If the task doesn't work, it gets fixed immediately because it blocks actual work.
+*Documentation that stays current*: README files tend to get outdated as soon as they're written, but a `justfile` is executable documentation. If the task doesn't work, it gets fixed immediately because it blocks actual work.
 
 *Enabling the team*: Product managers can trigger demo environment setups, QA can reset test databases, or support teams can generate diagnostic reports. All this without deep technical knowledge.
 
@@ -230,7 +230,7 @@ This comparison focuses on the most relevant options for Java development enviro
 
 . *Make* - A build automation tool with widespread adoption for command running
 . *Just* - Purpose-built command runner with modern syntax
-. *Task (Taskfile)* - YAML-based task runner built with Go
+. *Task (Taskfile)* - YAML-based command runner built with Go
 . *JBang* - Java-based scripting tool for task automation
 . *Gradle* - Build automation system with extensible task support
 
@@ -379,7 +379,7 @@ A useful way to read the examples is to separate *what you can express* from *ho
 
 === Make
 
-Make is the historical baseline: a build tool by origin, but still widely used as a general-purpose entry point because it's available on all Unix-like systems and "good enough" for many teams. In this comparison, please treat it as the reference point for trade-offs: powerful and familiar, but with older ergonomics (tabs, escaping rules, and environment-variable-driven parameters).
+Make is the historical baseline: a build tool by origin, but still widely used as a general-purpose entry point because it's available on all Unix-like systems and "good enough" for many teams. In this comparison, we treat Make as the reference point for trade-offs: powerful and familiar, but with older ergonomics (tabs, escaping rules, and environment-variable-driven parameters).
 
 [source,makefile]
 ----
@@ -665,7 +665,7 @@ tasks.register("integration-test") {
 
 === JShell
 
-JShell is Java's REPL (introduced in Java 9). It's not a task runner, but it can be a surprisingly effective "zero extra tooling" option when you want to script with plain JDK APIs and iterate interactively.
+JShell is Java's REPL (introduced in Java 9). It's not a command runner, but it can be a surprisingly effective "zero extra tooling" option when you want to script with plain JDK APIs and iterate interactively.
 
 [source,java]
 ----
@@ -758,7 +758,7 @@ jshell> deploy("staging")
 * ❌ No file inputs/outputs: Must implement change detection manually
 * ❌ Limited IDE support: Less tooling support than Gradle/Kotlin DSL
 * ❌ Manual invocation: Users must remember to call functions in the REPL
-* ❌ Not designed for automation: Primarily a REPL, not a task runner
+* ❌ Not designed for automation: Primarily a REPL, not a command runner
 
 '''
 
@@ -898,8 +898,8 @@ This article is accompanied by a practical demonstration repository containing w
 === Official websites
 
 * https://www.gnu.org/software/make/[GNU Make]
-* https://just.systems/[Just - A Command Runner]
-* https://taskfile.dev/[Task - A Task Runner / Build Tool]
+* https://just.systems/[Just - A command runner]
+* https://taskfile.dev/[Task - A command runner / build tool]
 * https://www.jbang.dev/[JBang - Scripting for Java]
 * https://gradle.org/[Gradle Build Tool]
-* https://picocli.info/[Picocli - A Mighty Tiny Command Line Interface]
+* https://picocli.info/[Picocli - A mighty tiny command line interface]
