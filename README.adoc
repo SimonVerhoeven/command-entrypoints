@@ -704,6 +704,43 @@ Beyond technical capabilities, the success of a command runner depends on how ea
 * ❌ Tasks mixed with build configuration can reduce clarity
 * ❌ May encourage over-engineering simple operations
 
+== My Recommendation
+
+Here's my practical guidance based on project characteristics and team needs.
+
+=== For Small to Medium Projects (1-5 services)
+
+*Use Just*. It's simple, fast, readable, and requires minimal learning. You can teach your entire team in 30 minutes. The syntax is clean enough that anyone can maintain it. Your `justfile` makes onboarding smooth sailing, which can be vital for small projects.
+
+=== For Large, Complex Projects (5+ services, multiple repositories)
+
+*Use Task (Taskfile)*. You'll appreciate:
+
+* File watching (`task --watch`)
+* Include files (share tasks across repos)
+* Status checks (skip unnecessary work)
+* Better variable handling for complex scenarios
+
+=== When Tasks Need Complex Logic
+
+*Add JBang*. Use it for tasks that require:
+
+* Database operations with JDBC
+* API integrations
+* Data transformation
+* Complex validation or business logic
+* Anything that benefits from type safety and testing
+
+=== For Shops with simple needs
+
+*Use your build tool's tasks*. Why add another tool if your build tool can handle it? But be disciplined, don't over-engineer.
+
+=== When to Stick with Make
+
+* Legacy projects where it's already working
+* Teams that live in the terminal and love Unix tools
+* When you truly need file dependency tracking (though consider your build tool for this)
+
 == Conclusion
 
 The rise of Just, Task, and JBang represents a recognition that *build tools and command runners serve different purposes*. Make was brilliant for its time, but it was designed as a C build tool in 1976 and later repurposed for general command running. Modern development workflows already leverage build tools (Maven, Gradle, Cargo, dotnet CLI). What we need is a lightweight, readable way to orchestrate common development tasks.
