@@ -229,6 +229,124 @@ Additionally, *JShell*, *npm scripts*, and *Maven exec* will be briefly covered 
 
 '''
 
+== Installation Quick Reference
+
+Before we start exploring each tool's syntax and capabilities, I recommend installing them so you can experiment and follow along with the examples.
+
+=== Make
+
+*Unix/Linux/macOS*: Usually pre-installed
+
+*Windows*: 
+[source,bash]
+----
+# Option 1: Download standalone binary
+# Visit: http://gnuwin32.sourceforge.net/packages/make.htm
+# Download and add to your PATH
+
+# Option 2: Use WSL (Windows Subsystem for Linux)
+# Make comes pre-installed in most WSL distributions
+
+# Option 3: Using Chocolatey (if already installed)
+choco install make
+----
+
+=== Just
+
+*Download pre-built binary*:
+
+- Visit: https://github.com/casey/just/releases
+- Download the appropriate binary for your platform
+- Add to your PATH
+
+*Using package managers* (alternative):
+[source,bash]
+----
+brew install just           # macOS (requires Homebrew)
+scoop install just          # Windows (requires Scoop)
+cargo install just          # Any OS (requires Rust toolchain)
+----
+
+=== Task
+
+*Download pre-built binary*:
+
+- Visit: https://github.com/go-task/task/releases
+- Download the appropriate binary for your platform
+- Add to your PATH
+
+*Installation script* (Linux/macOS):
+[source,bash]
+----
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+----
+
+*Using package managers* (alternative):
+[source,bash]
+----
+brew install go-task        # macOS (requires Homebrew)
+scoop install task          # Windows (requires Scoop)
+----
+
+=== JBang
+
+*Download and install*:
+
+- Visit: https://www.jbang.dev/download/
+- Download the installer for your platform
+
+*Installation script* (Linux/macOS):
+[source,bash]
+----
+curl -Ls https://sh.jbang.dev | bash -s - app setup
+----
+
+*Windows*:
+[source,bash]
+----
+# Option 1: Download installer
+# Visit: https://www.jbang.dev/download/
+
+# Option 2: Using Chocolatey (if already installed)
+choco install jbang
+
+# Option 3: Using Scoop (if already installed)
+scoop install jbang
+----
+
+*Using SDKMan* (alternative, if already installed):
+[source,bash]
+----
+sdk install jbang
+----
+
+=== JShell
+
+*All platforms*: Pre-installed with JDK 9 and later
+
+No separate installation is needed; you merely need to ensure that you have JDK 9+ installed and run `jshell` from the command line.
+
+
+=== Gradle
+
+*If not already in your project*:
+
+*Download and install*:
+
+- Visit: https://gradle.org/releases/
+- Download the binary distribution
+- Extract and add `bin` directory to your PATH
+
+*Using SDKMan* (alternative, if already installed):
+[source,bash]
+----
+sdk install gradle
+----
+
+*Note*: Many Java projects use the Gradle Wrapper (`gradlew`/`gradlew.bat`), which requires no separate installation.
+
+'''
+
 == Syntax and developer experience
 
 The choice of a command runner often comes down to developer experience: how intuitive the syntax is, how quickly you can get started, and how easy it is to maintain over time. In this section, we'll examine the syntax and practical usability of each tool through equivalent examples. 
