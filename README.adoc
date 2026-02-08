@@ -883,11 +883,11 @@ Beyond technical capabilities, the success of a command runner depends on how ea
 
 Here's my practical guidance based on project characteristics and team needs.
 
-=== For Small to Medium Projects (1-5 services)
+=== For small to medium projects (1-5 services)
 
 *Use Just*. It's simple, fast, readable, and requires minimal learning. You can teach your entire team in 30 minutes. The syntax is clean enough that anyone can maintain it. Your `justfile` makes onboarding smooth sailing, which can be vital for small projects.
 
-=== For Large, Complex Projects (5+ services, multiple repositories)
+=== For large, complex projects (5+ services, multiple repositories)
 
 *Use Task (Taskfile)*. You'll appreciate:
 
@@ -896,7 +896,7 @@ Here's my practical guidance based on project characteristics and team needs.
 * Status checks (skip unnecessary work)
 * Better variable handling for complex scenarios
 
-=== When Tasks Need Complex Logic
+=== When tasks need complex logic
 
 *Add JBang*. Use it for tasks that require:
 
@@ -906,11 +906,11 @@ Here's my practical guidance based on project characteristics and team needs.
 * Complex validation or business logic
 * Anything that benefits from type safety and testing
 
-=== For Shops with simple needs
+=== For shops with simple needs
 
 *Use your build tool's tasks*. Why add another tool if your build tool can handle it? But be disciplined, don't over-engineer.
 
-=== When to Stick with Make
+=== When to stick with Make
 
 * Legacy projects where it's already working
 * Teams that live in the terminal and love Unix tools
