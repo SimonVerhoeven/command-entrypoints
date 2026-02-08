@@ -480,7 +480,7 @@ Just is a purpose-built command runner that optimises for readability and a smoo
 # justfile
 
 # Set default environment
-environment := env_var_or_default('ENVIRONMENT', 'dev')
+environment := env('ENVIRONMENT', 'dev')
 service := env_var('SERVICE')
 
 # Clean build artifacts
