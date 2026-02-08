@@ -304,7 +304,10 @@ Before we start exploring each tool's syntax and capabilities, I recommend insta
 # Option 2: Use WSL (Windows Subsystem for Linux)
 # Make comes pre-installed in most WSL distributions
 
-# Option 3: Using Chocolatey (if already installed)
+# Option 3: Using winget (if already installed)
+winget install GnuWin32.Make
+
+# Option 4: Using Chocolatey (if already installed)
 choco install make
 ----
 
@@ -320,6 +323,7 @@ choco install make
 [source,bash]
 ----
 brew install just           # macOS (requires Homebrew)
+winget install Casey.Just   # Windows (requires winget)
 scoop install just          # Windows (requires Scoop)
 cargo install just          # Any OS (requires Rust toolchain)
 ----
@@ -342,7 +346,9 @@ sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
 [source,bash]
 ----
 brew install go-task        # macOS (requires Homebrew)
+winget install Task.Task    # Windows (requires winget)
 scoop install task          # Windows (requires Scoop)
+choco install go-task       # Windows (requires Chocolatey)
 ----
 
 === JBang
@@ -358,24 +364,17 @@ scoop install task          # Windows (requires Scoop)
 curl -Ls https://sh.jbang.dev | bash -s - app setup
 ----
 
-*Windows*:
+*Using package managers* (alternative):
 [source,bash]
 ----
-# Option 1: Download installer
-# Visit: https://www.jbang.dev/download/
-
-# Option 2: Using Chocolatey (if already installed)
-choco install jbang
-
-# Option 3: Using Scoop (if already installed)
-scoop install jbang
+brew install jbangdev/tap/jbang  # macOS (requires Homebrew)
+winget install jbangdev.jbang    # Windows (requires winget)
+scoop install jbang              # Windows (requires Scoop)
+choco install jbang              # Windows (requires Chocolatey)
 ----
 
 *Using SDKMan* (alternative, if already installed):
 [source,bash]
-----
-sdk install jbang
-----
 
 === Gradle
 
