@@ -879,6 +879,37 @@ Beyond technical capabilities, the success of a command runner depends on how ea
 * ❌ Tasks mixed with build configuration can reduce clarity
 * ❌ May encourage over-engineering simple operations
 
+== Advantages and disadvantages
+
+To quickly recapture the respective strengths and weaknesses of each tool:
+
+[cols="1,3,3"]
+|===
+|Tool |Advantages |Disadvantages
+
+|*Make*
+|Widely available on Unix systems, widely known, simple for basic tasks, file dependency tracking for builds
+|Tab sensitivity, syntax learning curve, limited Windows support, error messages can be difficult for newcomers, environment variable-based parameters
+
+|*Just*
+|Modern clean syntax, function-style parameters, clear error messages, fast, cross-platform, easy to learn, self-documenting
+|Requires installation, no file dependency tracking, smaller community than Make, additional project dependency
+
+|*Task*
+|YAML-based, file watching and status checks, cross-platform shell handling, file timestamp tracking, well-documented, powerful features
+|YAML verbosity for simple tasks, installation required, YAML formatting sensitivity, may be feature-rich beyond simple needs
+
+|*JBang*
+|Pure Java, type safety, full ecosystem access, testable, debuggable, no build tool ceremony, cross-platform via JVM
+|JVM startup overhead, more verbose for simple tasks, installation required, CLI framework knowledge needed, heavyweight for basic orchestration
+
+|*Gradle*
+|Already present in many Java projects, full IDE support, powerful programming language, the daemon speeds up subsequent runs, and file tracking capabilities
+|Slow cold start, build tool overhead for simple tasks, scope creep risk, more verbose than dedicated command runners, designed for building, not orchestration
+|===
+
+'''
+
 == My Recommendation
 
 Here's my practical guidance based on project characteristics and team needs.
