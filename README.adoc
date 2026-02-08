@@ -910,9 +910,9 @@ To quickly recapture the respective strengths and weaknesses of each tool:
 
 '''
 
-== My Recommendation
+== Recommendations
 
-Here's my practical guidance based on project characteristics and team needs.
+The best command runner depends on your project's complexity, team composition, and specific needs. Rather than a one-size-fits-all answer, consider these practical guidelines that balance simplicity, power, and team productivity.
 
 === For small to medium projects (1-5 services)
 
