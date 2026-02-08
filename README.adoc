@@ -554,7 +554,7 @@ version: '3'
 
 vars:
   ENVIRONMENT: '{{.ENVIRONMENT | default "dev"}}'
-  GRADLE: ./gradlew
+  GRADLE:./gradlew
 
 tasks:
   clean:
@@ -573,19 +573,21 @@ tasks:
   deploy:
     desc: Deploy to environment
     deps: [test]
+    if: '{{ne.ENV "prod" | or (env "CI")}}'
     vars:
-      ENV: '{{.ENV | default .ENVIRONMENT}}'
+      ENV: '{{.ENV | default.ENVIRONMENT}}'
     # Only redeploy if script changes
     sources:
-      - ./scripts/deploy.sh
+      -./scripts/deploy.sh
     cmds:
       - echo "Deploying to {{.ENV}}"
-      - ./scripts/deploy.sh {{.ENV}}
+      - infisical run --./scripts/deploy.sh {{.ENV}}
 
   integration-test:
     desc: Run integration tests for a service
     requires:
-      vars: [SERVICE]
+      vars:
+        - name: SERVICE
     cmds:
       - echo "Running integration tests for {{.SERVICE}}"
       - '{{.GRADLE}} :{{.SERVICE}}:integrationTest'
