@@ -16,15 +16,15 @@ v1.0, 2026-02-01
 :stem:
 :xrefstyle: short
 :experimental:
-:description: A comprehensive comparison of modern command runners (Make, Just, Task, JBang, Gradle) for Java developers, with practical examples and recommendations.
-:keywords: command runners, make, just, taskfile, jbang, gradle, java, devops, automation
+:description: A comprehensive comparison of modern command runners (Make, Just, Task, Mise, JBang, Gradle) for Java developers, with practical examples and recommendations.
+:keywords: command runners, make, just, taskfile, mise, jbang, gradle, java, devops, automation
 :copyright: Copyright (c) 2026 Simon Verhoeven
 :license: MIT License
 :license-url: https://opensource.org/licenses/MIT
 
 [abstract]
 --
-This article explores the landscape of command runners in 2026, comparing Make, Just, Task (Taskfile), JBang, and Gradle from a senior Java engineer's perspective. It covers the why, what, and how of command automation, with real-world scenarios, performance comparisons, and practical recommendations for choosing the right tool for your project.
+This article explores the landscape of command runners in 2026, comparing Make, Just, Task (Taskfile), Mise, JBang, and Gradle from a senior Java engineer's perspective. It covers the why, what, and how of command automation, with real-world scenarios, performance comparisons, and practical recommendations for choosing the right tool for your project.
 --
 
 toc::[]
