@@ -65,7 +65,7 @@ The new developer wastes days piecing together "how do I actually run this thing
 
 *With a command runner*, the friction disappears:
 
-* Run `just --list` to see all available operations
+* Run `just --list` or `mise tasks` to see all available operations
 * Run `just dev`, and everything starts in the correct order
 * Start exploring the running application
 
@@ -278,7 +278,8 @@ This comparison focuses on the most relevant options for Java development enviro
 
 . *Make* - A build automation tool with widespread adoption for command running
 . *Just* - Purpose-built command runner with modern syntax
-. *Task (Taskfile)* - YAML-based command runner built with Go
+. *Task (Taskfile)* - YAML-based command runner built with Go. 
+. *Mise* - Polyglot tool manager and integrated command runner
 . *JBang* - Java-based scripting tool for task automation
 . *Gradle* - Build automation system with extensible task support
 
@@ -349,6 +350,29 @@ brew install go-task        # macOS (requires Homebrew)
 winget install Task.Task    # Windows (requires winget)
 scoop install task          # Windows (requires Scoop)
 choco install go-task       # Windows (requires Chocolatey)
+----
+
+=== Mise
+
+*Download pre-built binary*:
+
+- Visit: https://github.com/jdx/mise/releases
+- Download the appropriate binary for your platform
+- Add to your PATH
+
+*Installation script* (Linux/macOS):
+[source,bash]
+----
+curl https://mise.run | sh
+----
+
+*Using package managers* (alternative):
+[source,bash]
+----
+brew install mise           # macOS (requires Homebrew)
+winget install jdx.mise     # Windows (requires winget)
+scoop install mise          # Windows (requires Scoop)
+choco install mise       # Windows (requires Chocolatey)
 ----
 
 === JBang
@@ -980,6 +1004,7 @@ This article is accompanied by a practical demonstration repository containing w
 * https://www.gnu.org/software/make/[GNU Make]
 * https://just.systems/[Just - A command runner]
 * https://taskfile.dev/[Task - A command runner / build tool]
+* https://mise.jdx.dev/[Mise-en-place - The front-end to your dev env]
 * https://www.jbang.dev/[JBang - Scripting for Java]
 * https://gradle.org/[Gradle Build Tool]
 * https://picocli.info/[Picocli - A mighty tiny command line interface]
