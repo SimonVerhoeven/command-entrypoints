@@ -399,6 +399,9 @@ choco install jbang              # Windows (requires Chocolatey)
 
 *Using SDKMan* (alternative, if already installed):
 [source,bash]
+----
+sdk install jbang
+----
 
 === Gradle
 
