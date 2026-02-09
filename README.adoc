@@ -648,6 +648,48 @@ tasks:
 * ❌ *YAML challenges*: Indentation and quoting can be error-prone
 * ❌ *Complexity*: Feature-rich nature may be more than needed for simple projects
 
+=== Mise
+
+By 2026, the industry has consolidated around fewer, more powerful tools. The "works on my machine" problem has shifted from locally installed software, thanks to tools such as Docker, to developer toolchains themselves. While many developers have spent years juggling `nvm` for Node, `pyenv` for Python, `sdkman` for Java, and `direnv` for secrets, **Mise** (formerly `rtx`) has emerged as the "one tool to rule them all." It is a polyglot tool version manager, environment manager, and task runner all bundled into a single, high-performance Rust binary.[2, 10]
+
+Mise’s most compelling argument is that it eliminates "tooling sprawl." Instead of having four different configuration files to set up a microservice, you have one `mise.toml` that ensures the correct JDK, Node version, and database credentials are all "en place" the moment you `cd` into the directory.
+
+[source,toml]
+----
+# mise.toml
+[tools]
+java = "temurin-21"        # Replaces sdkman/jenv
+node = "22"                # Replaces nvm
+terraform = "1.7"          # Replaces tfenv
+
+[env]
+# Replaces direnv/dotenv
+DATABASE_URL = "postgresql://localhost:5432/myapp"
+# 2026: Native support for encrypted secrets via sops 
+_.file = ".env.secrets.json"
+
+[tasks.dev]
+description = "Start local development environment"
+# Tasks automatically run with the tools and env defined above 
+run = """
+docker-compose up -d
+./gradlew bootRun
+"""
+----
+
+*Pros:*
+
+* ✅ **Near-Zero Overhead:** Unlike `asdf`, which uses "shims" (adding ~120ms lag), Mise modifies the `PATH` directly, making tool execution instantaneous.
+* ✅ **Integrated Lifecycle:** It manages tool installation, environment variables, and task execution in a single workflow. If a developer runs a task, Mise installs any missing JDKs or runtimes automatically.
+* ✅ **Security-First:** Includes native integration with **sops** and **age** for managing encrypted secrets within your repository.
+* ✅ **Parallel Execution:** Mise tasks can run in parallel by default, which is a significant speedup for monorepos.
+
+*Cons:*
+
+* ❌ **Learning Curve:** The "hierarchical configuration" can be confusing for teams new to the tool.[2]
+* ❌ **Ecosystem Size:** While compatible with all `asdf` plugins, its native plugin library is still growing.
+* ❌ **Windows Nuances:** Although it supports Windows, features like automatic PATH modification require PowerShell profile setup, and WSL2 is recommended for the best experience.
+
 === JBang
 
 JBang is a different kind of solution: instead of declaring tasks in a DSL, you're writing Java (or Java-adjacent) code that runs like a script. This becomes attractive when tasks stop being pure orchestration and start needing real logic, libraries, tests, and a polished CLI. This does come at the cost of more ceremony and JVM startup overhead.
@@ -693,7 +735,6 @@ Gradle can act as a command entrypoint, especially in Java projects where it's o
 [source,kotlin]
 ----
 // build.gradle.kts
-
 tasks.register("deploy") {
     description = "Deploy to environment"
     group = "deployment"
