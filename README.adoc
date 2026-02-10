@@ -1001,6 +1001,10 @@ The best command runner depends on your project's complexity, team composition, 
 
 *Use Just*. It's simple, fast, readable, and requires minimal learning. You can teach your entire team in 30 minutes. The syntax is clean enough that anyone can maintain it. Your `justfile` makes onboarding smooth sailing, which can be vital for small projects.
 
+=== For environment standardisation and polyglot teams
+
+*Standardise on Mise*. It is the only tool that solves the "it works on my machine" problem by managing the runtimes (JDK, Node, Python) alongside the tasks in a single `mise.toml`. It effectively replaces the "mess" of `asdf`, `direnv`, and scattered shell scripts.
+
 === For large, complex projects (5+ services, multiple repositories)
 
 *Use Task (Taskfile)*. You'll appreciate:
