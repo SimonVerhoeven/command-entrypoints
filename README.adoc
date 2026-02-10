@@ -69,7 +69,7 @@ The new developer wastes days piecing together "how do I actually run this thing
 * Run `just dev`, and everything starts in the correct order
 * Start exploring the running application
 
-=== The Solution: A single, discoverable entry point
+=== The solution: a single, discoverable entry point
 
 A command runner provides a *self-documenting interface* to your project's operations:
 
