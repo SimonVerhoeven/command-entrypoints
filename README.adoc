@@ -513,44 +513,43 @@ set dotenv-load := true
 environment := env('ENVIRONMENT', 'dev')
 service     := env('SERVICE', 'core-api')
 
-# Sets the fallback recipe
+# Sets the fallback recipe (Supported in version 1.43.0+) 
 [default]
 list:
     @just --list
 
 # Clean build artifacts
 clean:
-    echo "Cleaning build artifacts"
+    @echo "Cleaning build artifacts"
    ./gradlew clean
     rm -rf build/
 
 # Run tests
 test:
-    echo "Running tests"
+    @echo "Running tests"
    ./gradlew test
 
 # [confirm] attribute provides a safety guard for human and agentic workflows.
 # Credentials are injected via a secure wrapper to avoid.env exposure.
-
 deploy env=environment: test
     @echo "Fetching ephemeral credentials and deploying to {{env}}..."
     infisical run --./scripts/deploy.sh {{env}}
 
-# Per-recipe environment variables using the new [env] attribute (2026)
-
-[env("LOG_LEVEL", "warn")]
-check-status:
-    @echo "Checking status for {{service}}..."
+# Per-recipe environment variables using the '$' parameter prefix 
+check-status $LOG_LEVEL="warn":
+    @echo "Checking status for {{service}} with LOG_LEVEL=$LOG_LEVEL..."
    ./scripts/check.sh
 
+# Use the [script] attribute, which was stabilised in late 2025 (Version 1.44.0) 
 [script("python3")]
 analyze-logs:
     import os
+    # Exported variables or global Just variables are accessible via os.getenv [1]
     print(f"Analyzing logs for {os.getenv('SERVICE')}")
 
 # Integration tests
 integration-test:
-    @echo f"Targeting service: {service}"
+    @echo "Targeting service: {{service}}"
    ./gradlew :{{service}}:integrationTest
 ----
 
