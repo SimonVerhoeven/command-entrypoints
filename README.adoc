@@ -978,6 +978,10 @@ To quickly recapture the respective strengths and weaknesses of each tool:
 |YAML-based, file watching and status checks, cross-platform shell handling, file timestamp tracking, well-documented, powerful features
 |YAML verbosity for simple tasks, installation required, YAML formatting sensitivity, may be feature-rich beyond simple needs
 
+|*Mise*
+|Unified tool/env/task manager, no shim lag, asdf-compatible, automatically installs required runtimes before task execution
+|Hierarchical configuration can be confusing, newer command ecosystem than Make & Just, and some features remain experimental
+
 |*JBang*
 |Pure Java, type safety, full ecosystem access, testable, debuggable, no build tool ceremony, cross-platform via JVM
 |JVM startup overhead, more verbose for simple tasks, installation required, CLI framework knowledge needed, heavyweight for basic orchestration
