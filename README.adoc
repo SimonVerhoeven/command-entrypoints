@@ -1053,6 +1053,110 @@ Your `justfile` or `Taskfile.yml` should be the friendly entry point to your pro
 
 '''
 
+== AI-Ready orchestration
+
+Whether you're an enthusiastic early adopter or a cautious sceptic, AI-assisted development is reshaping how teams interact with their codebases. This isn't about choosing sides but rather about acknowledging reality. AI agents, coding assistants, and LLM-powered tools are already in use across development teams, and that usage will only increase. Our responsibility is to design systems that work well for both humans *and* the tools assisting them, without compromising the clarity and maintainability that make projects sustainable.
+
+The good news: making your command runner "AI-ready" doesn't require special AI-specific tooling or complexity. It means applying the same principles that have always made good software:
+
+* clear naming
+* structured metadata
+* discoverable interfaces
+* sensible security boundaries
+
+A well-designed task file serves human developers *and* AI agents equally well.
+
+Command runners empower both human developers and AI agents. Just as we learned that good API design makes integration easier, task files designed with machine discoverability in mind reduce friction for both agentic workflows and human teams. Rather than increasing complexity, it underscores the importance of always being deliberate about structure, naming, and metadata.
+
+=== The Model Context Protocol (MCP): Discovery Over Documentation
+
+The Model Context Protocol has emerged as a standard interface connecting LLMs to local tools and data. Rather than forcing agents to parse raw shell scripts, which bloats context windows and invites syntax errors, certain MCP adapters, such as `just-mcp` and `gotask-mcp`, expose your recipes as structured, callable tools.
+
+*What this means practically:*
+
+* **Token efficiency**: Agents interact with task names and schemas rather than reading entire script implementations
+* **Structured discovery**: Tools like `just-mcp` allow agents to query available commands (`/just:list-recipes`) without manual parsing
+* **Bidirectional capabilities**: Modern MCP servers support "sampling," where the task runner itself can query the LLM mid-execution—such as asking "Does this migration look safe?" before applying database changes
+
+For example, the following `# AI Hint` signals to agents that tasks are discoverable via `just --list`:
+
+[source,just]
+----
+# justfile
+# AI Hint: This file is Model Context Protocol (MCP) optimised. 
+# AI agents should use `just --list` to discover available tools.
+----
+
+This approach keeps tasks human-readable while making them machine-discoverable, thus no separate "AI documentation" is needed.
+
+=== llms.txt: the project roadmap for AI
+
+As coding assistants like Cursor and GitHub Copilot become standard, repositories increasingly include `llms.txt` at the root.
+This is a lightweight "sitemap for AI" that directs agents to canonical documentation and entry points.
+
+* **llms.txt**: A concise Markdown file summarising the project structure and primary commands
+* **llms-full.txt**: A comprehensive export containing full documentation for deep context ingestion and retrieval-augmented generation (RAG)
+
+Tools like Task have integrated VitePress plugins to auto-generate these files, ensuring AI context stays synchronised with actual implementation. This helps our task runner become the source of truth for both humans and agents.
+
+=== Security Considerations: Engineering the Guardrails
+
+The rise of AI-assisted development, where applications are built and modified through natural language prompts, most certainly introduces new security challenges. When agents execute tasks autonomously, proper isolation and access controls become mandatory, not optional.
+
+*Key guardrails for AI execution:*
+
+I've included some key guardrails to keep in mind when writing your files to help ensure safety.
+
+**Sandbox Isolation**: Autonomous agents should never run with direct host access. For production-grade isolation, we can use micro-VMs like Firecracker or gVisor. For local development, lightweight jails like Bubblewrap restrict filesystem and network access:
+
+[source,bash]
+----
+# Example Bubblewrap jail for an AI agent (Linux)
+bwrap --ro-bind /usr /usr \
+      --ro-bind /lib /lib \
+      --ro-bind /lib64 /lib64 \
+      --dir /tmp \
+      --unshare-all \
+      --share-net \
+      --bind $(pwd) /workspace \
+      --chdir /workspace \
+      ./agent-binary
+----
+
+**Deterministic Contracts**: Define "safe outputs" where agents can only produce specific artifacts (e.g., opening a pull request) while being blocked from high-risk actions like pushing directly to main:
+
+[source,yaml]
+----
+# Example Safe-Outputs Policy (safe-outputs.yaml)
+version: "2026.1"
+agent_permissions:
+  scope: "read-only"
+  allowed_artifacts:
+    - type: "pull_request"
+      target_branch: "ai-proposals"
+    - type: "issue_comment"
+  blocked_actions:
+    - "git_push_main"
+    - "filesystem_write_global"
+----
+
+**Identity-Aware Execution**: Treat agents as distinct identities with least-privilege API keys. Link every action to a specific human operator for audit trails:
+
+[source,bash]
+----
+# Identity-aware execution via CLI wrapper
+export AGENT_ID="codex-alpha-01"
+export HUMAN_OPERATOR="simon.v"
+
+# Link agent action to human orchestrator for audit trail
+infisical run --env AGENT_SECRET -- \
+  just deploy --identity-header "X-Agent: $AGENT_ID; X-Operator: $HUMAN_OPERATOR"
+----
+
+**The bottom line**: Make AI assistance productive while maintaining the safety boundaries required for production systems. Your task runner becomes the control plane for both human and agentic workflows—discoverable, auditable, and secure by design. Whether AI agents are executing tasks today or five years from now, the principles of good design remain the same: clarity, structure, and appropriate constraints.
+
+'''
+
 == References
 
 === Demo repository
