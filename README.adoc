@@ -937,6 +937,13 @@ Beyond technical capabilities, the success of a command runner depends on how ea
 * ❌ YAML can become verbose for simple tasks
 * ❌ Additional tool to install and maintain
 
+*Mise*:
+
+* ✅ High Return on Investment: Replaces multiple tool managers like nvm, pyenv, and sdkman 
+* ✅ Performance: Near-zero overhead as it modifies PATH directly rather than using slow shims
+* ❌ Complexity: The hierarchical merging of configurations (global vs. local) requires a clear team strategy
+* ❌ Windows support: While much improved in 2026, it still requires more setup than a simple binary like Just
+
 *JBang*:
 
 * ✅ Leverages existing language knowledge (Java)
