@@ -898,6 +898,9 @@ Cross-platform compatibility and ease of setup across different environments are
 |*Task*
 |✅ Excellent support; written in Go, compiles to single binary, handles shell differences gracefully
 
+|*Mise*
+|✅ Native Rust binary; handles Windows paths via shims or activation 
+
 |*JBang*
 |✅ Java's "write once, run anywhere" promise (requires JDK)
 
