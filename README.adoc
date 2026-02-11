@@ -1156,6 +1156,51 @@ infisical run --env AGENT_SECRET -- \
 
 '''
 
+=== Secret management with SOPS and AGE
+
+Mise includes first‑class support for encrypted env files via **SOPS** + **AGE**, giving you a secure alternative to plain‑text `.env` files without adding workflow friction.
+
+* **SOPS (Secrets OPerationS)** is Mozilla’s encryption tool for structured config files. It lets you keep JSON, YAML, or TOML files encrypted *in place* while still being diffable and version‑controlled.
+* **AGE** is a modern, minimalist encryption tool designed as a simpler, safer alternative to GPG. It provides the key format that is used by SOPS for encryption and decryption.
+
+With Mise, you can store encrypted `.env.json`, `.env.yaml`, or `.env.toml` files directly in the repo. Mise decrypts them automatically when tasks run—provided the correct AGE private key is available (via `MISE_SOPS_AGE_KEY` or a local key file).
+
+The result is *security without friction*: developers get secrets injected automatically, and workflows stay fast. Mise uses a high‑performance decryptor by default (via `rops`), so secret loading feels instant in day‑to‑day work. You can also enable log redaction (`redact = true` in the `env._.file` config) to avoid accidental leakage in CI or shared terminals—an underrated but critical safety net for modern teams.
+
+---
+
+=== Enterprise secret governance with fnox
+
+For file‑based secrets, SOPS is enough. But in enterprise environments, we often need to integrate with *centralised vaults* and cloud identity providers. That’s where **fnox (Fort Knox)** comes in: a separate CLI designed by the creator of Mise to manage secrets across providers like **1Password**, **Bitwarden**, **HashiCorp Vault**, **AWS Secrets Manager**, and **Azure Key Vault**.
+
+Mise and fnox are intentionally separate:
+
+* **Mise** focuses on fast local environment switching with aggressive caching
+* **fnox** handles real‑time, secure access to remote secret providers
+
+This separation matters: it avoids the performance hit you’d get if every `cd` triggered network calls to a vault.
+
+---
+
+=== Common fnox patterns for Mise teams
+
+* **Identity‑aware decryption**: Encrypt secrets for multiple recipients so each developer can use their own SSH or AGE key.
+* **Unified interface**: Run any task with secrets injected via `fnox exec -- <command>`.
+* **Environment profiles**: Define separate secret sets for `dev`, `staging`, and `prod` in a version‑controlled `fnox.toml` without exposing the secrets themselves.
+
+[source,toml]
+----
+# Example fnox.toml for 1Password integration
+[providers.op]
+type = "onepassword"
+vault = "Engineering"
+
+[secrets]
+DB_PASSWORD = { provider = "op", item = "Postgres", field = "password" }
+STRIPE_KEY  = { provider = "op", item = "Stripe", field = "credential" }
+----
+
+
 == References
 
 === Demo repository
