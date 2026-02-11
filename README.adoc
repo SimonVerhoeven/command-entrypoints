@@ -609,7 +609,7 @@ tasks:
       - ./scripts/deploy.sh
     cmds:
       - echo "Deploying to {{.ENV}}"
-      - infisical run --./scripts/deploy.sh {{.ENV}}
+      - infisical run -- ./scripts/deploy.sh {{.ENV}}
 
   integration-test:
     desc: Run integration tests for a service
