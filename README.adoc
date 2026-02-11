@@ -95,11 +95,11 @@ Think of command runners as the *friendly interface* to your project. +
 They don't replace your other tools—they *orchestrate* them:
 
 ----
-Developer → command Runner → Build Tools (Gradle/Maven)
+Developer → command runner → Build tools (Gradle/Maven)
                            → Containers (Docker/Docker Compose)
                            → Databases (Flyway/Liquibase)
                            → Infrastructure (Terraform/kubectl)
-                           → Custom Scripts
+                           → Custom scripts
 ----
 
 Modern projects use diverse tooling across different domains.  +
@@ -521,13 +521,13 @@ list:
 # Clean build artifacts
 clean:
     @echo "Cleaning build artifacts"
-   ./gradlew clean
+    ./gradlew clean
     rm -rf build/
 
 # Run tests
 test:
     @echo "Running tests"
-   ./gradlew test
+    ./gradlew test
 
 # [confirm] attribute provides a safety guard for human and agentic workflows.
 # Credentials are injected via a secure wrapper to avoid.env exposure.
@@ -649,7 +649,7 @@ tasks:
 
 === Mise
 
-By 2026, the industry has consolidated around fewer, more powerful tools. The "works on my machine" problem has shifted from locally installed software, thanks to tools such as Docker, to developer toolchains themselves. While many developers have spent years juggling `nvm` for Node, `pyenv` for Python, `sdkman` for Java, and `direnv` for secrets, **Mise** (formerly `rtx`) has emerged as the "one tool to rule them all." It is a polyglot tool version manager, environment manager, and task runner all bundled into a single, high-performance Rust binary.[2, 10]
+By 2026, the industry is consolidating around fewer, more powerful tools. The "works on my machine" problem has shifted from locally installed software, thanks to tools such as Docker, to developer toolchains themselves. While many developers have spent years juggling `nvm` for Node, `pyenv` for Python, `sdkman` for Java, and `direnv` for secrets, **Mise** (formerly `rtx`) has emerged as the "one tool to rule them all." It is a polyglot tool version manager, environment manager, and task runner all bundled into a single, high-performance Rust binary.[2, 10]
 
 Mise’s most compelling argument is that it eliminates "tooling sprawl." Instead of having four different configuration files to set up a microservice, you have one `mise.toml` that ensures the correct JDK, Node version, and database credentials are all "en place" the moment you `cd` into the directory.
 
@@ -678,16 +678,16 @@ docker-compose up -d
 
 *Pros:*
 
-* ✅ **Near-Zero Overhead:** Unlike `asdf`, which uses "shims" (adding ~120ms lag), Mise modifies the `PATH` directly, making tool execution instantaneous.
-* ✅ **Integrated Lifecycle:** It manages tool installation, environment variables, and task execution in a single workflow. If a developer runs a task, Mise installs any missing JDKs or runtimes automatically.
-* ✅ **Security-First:** Includes native integration with **sops** and **age** for managing encrypted secrets within your repository.
-* ✅ **Parallel Execution:** Mise tasks can run in parallel by default, which is a significant speedup for monorepos.
+* ✅ **Low overhead:** Unlike `asdf`, which uses "shims" (adding ~120ms lag), Mise modifies the `PATH` directly, making tool execution instantaneous.
+* ✅ **Integrated lifecycle:** It manages tool installation, environment variables, and task execution in a single workflow. If a developer runs a task, Mise installs any missing JDKs or runtimes automatically.
+* ✅ **Security-first:** Includes native integration with **sops** and **age** for managing encrypted secrets within your repository.
+* ✅ **Parallel execution:** Mise tasks can run in parallel by default, which is a significant speedup for monorepos.
 
 *Cons:*
 
-* ❌ **Learning Curve:** The "hierarchical configuration" can be confusing for teams new to the tool.[2]
-* ❌ **Ecosystem Size:** While compatible with all `asdf` plugins, its native plugin library is still growing.
-* ❌ **Windows Nuances:** Although it supports Windows, features like automatic PATH modification require PowerShell profile setup, and WSL2 is recommended for the best experience.
+* ❌ **Learning curve:** The "hierarchical configuration" can be confusing for teams new to the tool.[2]
+* ❌ **Ecosystem size:** While compatible with all `asdf` plugins, its native plugin library is still growing.
+* ❌ **Windows nuances:** Although it supports Windows, features like automatic PATH modification require PowerShell profile setup, and WSL2 is recommended for the best experience.
 
 === JBang
 
@@ -998,7 +998,7 @@ The best command runner depends on your project's complexity, team composition, 
 
 === For small to medium projects (1-5 services)
 
-*Use Just*. It's simple, fast, readable, and requires minimal learning. You can teach your entire team in 30 minutes. The syntax is clean enough that anyone can maintain it. Your `justfile` makes onboarding smooth sailing, which can be vital for small projects.
+*Use Just*. It is simple, fast, and readable, with a low learning curve. Most teams can adopt it quickly, and the syntax remains approachable over time. A well‑maintained `justfile` reduces onboarding friction, which is especially valuable for small projects.
 
 === For environment standardisation and polyglot teams
 
@@ -1069,7 +1069,7 @@ Command runners empower both human developers and AI agents. Just as we learned 
 
 === The Model Context Protocol (MCP): Discovery Over Documentation
 
-The Model Context Protocol has emerged as a standard interface connecting LLMs to local tools and data. Rather than forcing agents to parse raw shell scripts, which bloats context windows and invites syntax errors, certain MCP adapters, such as `just-mcp` and `gotask-mcp`, expose your recipes as structured, callable tools.
+The Model Context Protocol is emerging as a standard interface connecting LLMs to local tools and data. Rather than forcing agents to parse raw shell scripts, which bloats context windows and invites syntax errors, certain MCP adapters, such as `just-mcp` and `gotask-mcp`, expose your recipes as structured, callable tools. Support is still uneven across ecosystems, so treat MCP integration as optional rather than foundational.
 
 *What this means practically:*
 
