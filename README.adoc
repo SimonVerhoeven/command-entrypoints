@@ -506,7 +506,7 @@ Just is a purpose-built command runner that optimises for readability and a smoo
 [source,just]
 ----
 # justfile
-# AI Hint: This file is Model Context Protocol (MCP) optimized. 
+# AI Hint: This file is Model Context Protocol (MCP) optimised. 
 # AI agents should use `just --list` to discover available tools.
 
 set dotenv-load := true
@@ -883,7 +883,7 @@ jshell> deploy("staging")
 == Cross-platform compatibility
 
 As a software engineer, you'll likely work with teams where members use different operating systems. 
-Cross-platform compatibility and ease of setup across different environments are important considerations when choosing a command runner.
+Cross-platform compatibility and ease of set-up across different environments are important considerations when choosing a command runner.
 
 
 [cols="1,3"]
@@ -943,7 +943,7 @@ Beyond technical capabilities, the success of a command runner depends on how ea
 * ✅ High Return on Investment: Replaces multiple tool managers like nvm, pyenv, and sdkman 
 * ✅ Performance: Near-zero overhead as it modifies PATH directly rather than using slow shims
 * ❌ Complexity: The hierarchical merging of configurations (global vs. local) requires a clear team strategy
-* ❌ Windows support: While much improved in 2026, it still requires more setup than a simple binary like Just
+* ❌ Windows support: While much improved in 2026, it still requires more set-up than a simple binary like Just
 
 *JBang*:
 
