@@ -33,6 +33,8 @@ toc::[]
 
 Every development team faces the same challenge: *How do we make our projects easy to work with?* Whether you're onboarding a new engineer, setting up CI/CD pipelines, or just trying to remember how to run integration tests after a week away from a project, the cognitive load adds up. Command runners provide a solution by offering a consistent, self-documenting interface to all your project's operations.
 
+Given the rising usage of AI, command runners become even more valuable. A single entry point gives human and AI agents the same view of how to operate a project. Rather than an LLM guessing at ad‑hoc shell commands, it can list available tasks and run your verified  workflows. This way we can reduce risks, improve the reproducibility, and make automation safer for teams working at scale.
+
 In this article, we'll explore why command runners matter, trace their evolution from Make to modern alternatives, and provide practical guidance on choosing and implementing the right tool for your projects.
 
 == Why use a command runner at all?
