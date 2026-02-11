@@ -374,7 +374,7 @@ curl https://mise.run | sh
 brew install mise           # macOS (requires Homebrew)
 winget install jdx.mise     # Windows (requires winget)
 scoop install mise          # Windows (requires Scoop)
-choco install mise       # Windows (requires Chocolatey)
+choco install mise          # Windows (requires Chocolatey)
 ----
 
 === JBang
@@ -532,15 +532,15 @@ test:
     ./gradlew test
 
 # [confirm] attribute provides a safety guard for human and agentic workflows.
-# Credentials are injected via a secure wrapper to avoid.env exposure.
+# Credentials are injected via a secure wrapper to avoid .env exposure.
 deploy env=environment: test
     @echo "Fetching ephemeral credentials and deploying to {{env}}..."
-    infisical run --./scripts/deploy.sh {{env}}
+    infisical run -- ./scripts/deploy.sh {{env}}
 
 # Per-recipe environment variables using the '$' parameter prefix 
 check-status $LOG_LEVEL="warn":
     @echo "Checking status for {{service}} with LOG_LEVEL=$LOG_LEVEL..."
-   ./scripts/check.sh
+    ./scripts/check.sh
 
 # Use the [script] attribute, which was stabilised in late 2025 (Version 1.44.0) 
 [script("python3")]
@@ -552,7 +552,7 @@ analyze-logs:
 # Integration tests
 integration-test:
     @echo "Targeting service: {{service}}"
-   ./gradlew :{{service}}:integrationTest
+    ./gradlew :{{service}}:integrationTest
 ----
 
 *Pros:*
@@ -582,7 +582,7 @@ version: '3'
 
 vars:
   ENVIRONMENT: '{{.ENVIRONMENT | default "dev"}}'
-  GRADLE:./gradlew
+  GRADLE: ./gradlew
 
 tasks:
   clean:
@@ -606,7 +606,7 @@ tasks:
       ENV: '{{.ENV | default.ENVIRONMENT}}'
     # Only redeploy if script changes
     sources:
-      -./scripts/deploy.sh
+      - ./scripts/deploy.sh
     cmds:
       - echo "Deploying to {{.ENV}}"
       - infisical run --./scripts/deploy.sh {{.ENV}}
