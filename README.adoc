@@ -89,7 +89,7 @@ Available recipes:
 ----
 
 Now the new developer knows exactly what's possible and how to do it.  +
-No hunting through documentation, no asking teammates basic questions, no tribal knowledge required.
+They don't need to hunt through documentation, ask teammates basic questions, or rely on so-called tribal knowledge.
 
 === The "Command Runner" mental model
 
@@ -106,6 +106,42 @@ Developer → command runner → Build tools (Gradle/Maven)
 
 Modern projects use diverse tooling across different domains.  +
 A command runner provides a consistent interface with clear documentation, dependency management, parameter handling, and cross-platform compatibility.
+
+
+
+=== When should you start using scripts?
+
+Scripts are often the *first* step in automation, which is a logical first step.  +
+The real question is not “Should we use scripts?” but *“When do scripts stop being enough?”*
+
+Use scripts when:
+
+* A task has more than one step and should be repeatable
+* You find yourself copy‑pasting the same commands across projects
+* You need to remember flags, environment variables, or ordering
+* You want to lower onboarding friction for new team members
+
+*Scripts are great because:*
+
+* ✅ *Fast to write*: there is no ceremony nor tooling decisions
+* ✅ *Flexible*: the full power of your shell or language
+* ✅ *Low overhead*: there are no extra dependencies
+
+But scripts start to become cumbersome when:
+
+* You have *more than a handful* of them and no discoverability
+* Tasks depend on other tasks, and the ordering starts to matter
+* You need consistent behaviour across macOS, Linux, and Windows
+* Parameter handling becomes inconsistent across scripts
+* Documentation drifts away from reality
+
+At that point, scripts are still useful, but they should be *orchestrated*, not *discovered*.  +
+This is where command runners shine: keep scripts for complexity, and provide a single, documented entry point for everything else.
+
+I recommend a simple rule of thumb:
+
+*Use scripts for isolated tasks.  
+Adopt a command runner once scripts become a system.*
 
 === What about just using Shell scripts?
 
