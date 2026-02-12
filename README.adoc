@@ -1371,7 +1371,6 @@ DB_PASSWORD = { provider = "op", item = "Postgres", field = "password" }
 STRIPE_KEY  = { provider = "op", item = "Stripe", field = "credential" }
 ----
 
-
 == References
 
 === Demo repository
@@ -1386,6 +1385,7 @@ This article is accompanied by a practical demonstration repository containing w
 * https://just.systems/[Just - A command runner]
 * https://taskfile.dev/[Task - A command runner / build tool]
 * https://mise.jdx.dev/[Mise-en-place - The front-end to your dev env]
+* https://fnox.jdx.dev/[FNOX - Fort Knox for your secrets]
 * https://www.jbang.dev/[JBang - Scripting for Java]
 * https://gradle.org/[Gradle Build Tool]
 * https://picocli.info/[Picocli - A mighty tiny command line interface]
