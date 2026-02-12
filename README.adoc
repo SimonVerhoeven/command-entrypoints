@@ -697,13 +697,146 @@ JBang is a different kind of solution: instead of declaring tasks in a DSL, you'
 
 [source,java]
 ----
-<!-- Source: https://mvnrepository.com/artifact/info.picocli/picocli -->
-<dependency>
-    <groupId>info.picocli</groupId>
-    <artifactId>picocli</artifactId>
-    <version>4.7.7</version>
-    <scope>compile</scope>
-</dependency>
+///usr/bin/env jbang "$0" "$@" ; exit $?
+//DEPS info.picocli:picocli:4.7.6
+
+import picocli.CommandLine;
+import picocli.CommandLine.*;
+
+import java.io.File;
+import java.util.concurrent.Callable;
+
+@Command(
+    name = "task",
+    mixinStandardHelpOptions = true,
+    version = "task 1.0",
+    description = "Task runner equivalent for Taskfile.yml",
+    subcommands = {
+        TaskApp.Clean.class,
+        TaskApp.Test.class,
+        TaskApp.Deploy.class,
+        TaskApp.IntegrationTest.class,
+        TaskApp.Dev.class,
+        TaskApp.ListTasks.class
+    }
+)
+public class TaskApp implements Callable<Integer> {
+
+    public static void main(String[] args) {
+        int exit = new CommandLine(new TaskApp())
+            .setCaseInsensitiveEnumValuesAllowed(true)
+            .execute(args);
+        System.exit(exit);
+    }
+
+    @Override
+    public Integer call() {
+        // Default: list all available tasks
+        return new CommandLine(new ListTasks()).execute();
+    }
+
+    static String envOrDefault(String key, String def) {
+        String val = System.getenv(key);
+        return (val == null || val.isBlank()) ? def : val;
+    }
+
+    static String gradle() {
+        return envOrDefault("GRADLE", "./gradlew");
+    }
+
+    static int run(String command) throws Exception {
+        ProcessBuilder pb = new ProcessBuilder("/bin/sh", "-c", command);
+        pb.inheritIO();
+        Process p = pb.start();
+        return p.waitFor();
+    }
+
+    @Command(name = "clean", description = "Clean build artifacts")
+    static class Clean implements Callable<Integer> {
+        @Override
+        public Integer call() throws Exception {
+            System.out.println("Cleaning build artifacts");
+            int rc1 = run(gradle() + " clean");
+            if (rc1 != 0) return rc1;
+            return run("rm -rf build/");
+        }
+    }
+
+    @Command(name = "test", description = "Run tests")
+    static class Test implements Callable<Integer> {
+        @Override
+        public Integer call() throws Exception {
+            System.out.println("Running tests");
+            return run(gradle() + " test");
+        }
+    }
+
+    @Command(name = "deploy", description = "Deploy to environment")
+    static class Deploy implements Callable<Integer> {
+
+        @Option(names = {"-e", "--env"}, description = "Target environment (default: ${DEFAULT-VALUE})")
+        String env = envOrDefault("ENVIRONMENT", "dev");
+
+        @Option(names = {"--skip-test"}, description = "Skip test dependency")
+        boolean skipTest;
+
+        @Override
+        public Integer call() throws Exception {
+            // Mimic condition: if ENV != prod OR CI is set
+            String ci = System.getenv("CI");
+            boolean allow = !"prod".equalsIgnoreCase(env) || (ci != null && !ci.isBlank());
+            if (!allow) {
+                System.err.println("Deploy blocked: ENV=prod and CI is not set.");
+                return 2;
+            }
+
+            // Dependency: test
+            if (!skipTest) {
+                int rc = new CommandLine(new Test()).execute();
+                if (rc != 0) return rc;
+            }
+
+            System.out.println("Deploying to " + env);
+            return run("infisical run -- ./scripts/deploy.sh " + env);
+        }
+    }
+
+    @Command(name = "integration-test", description = "Run integration tests for a service")
+    static class IntegrationTest implements Callable<Integer> {
+
+        @Option(names = {"-s", "--service"}, required = true, description = "Service name")
+        String service;
+
+        @Override
+        public Integer call() throws Exception {
+            System.out.println("Running integration tests for " + service);
+            return run(gradle() + " :" + service + ":integrationTest");
+        }
+    }
+
+    @Command(name = "dev", description = "Start local development environment")
+    static class Dev implements Callable<Integer> {
+        @Override
+        public Integer call() throws Exception {
+            // Dependency: clean
+            int rc = new CommandLine(new Clean()).execute();
+            if (rc != 0) return rc;
+
+            int rc1 = run("docker-compose up -d postgres redis");
+            if (rc1 != 0) return rc1;
+            return run(gradle() + " bootRun");
+        }
+    }
+
+    @Command(name = "default", description = "List all available tasks")
+    static class ListTasks implements Callable<Integer> {
+        @Override
+        public Integer call() {
+            new CommandLine(new TaskApp()).usage(System.out);
+            return 0;
+        }
+    }
+}
 ----
 
 *Pros:*
