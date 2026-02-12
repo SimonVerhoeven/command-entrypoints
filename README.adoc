@@ -1269,7 +1269,7 @@ This is a lightweight "sitemap for AI" that directs agents to canonical document
 
 Tools like Task have integrated VitePress plugins to auto-generate these files, ensuring AI context stays synchronised with actual implementation. This helps our task runner become the source of truth for both humans and agents.
 
-=== Security Considerations: Engineering the Guardrails
+=== Security considerations: engineering the guardrails
 
 The rise of AI-assisted development, where applications are built and modified through natural language prompts, most certainly introduces new security challenges. When agents execute tasks autonomously, proper isolation and access controls become mandatory, not optional.
 
