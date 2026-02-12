@@ -325,7 +325,7 @@ Additionally, *JShell*, *npm scripts*, and *Maven exec* will be briefly covered 
 
 '''
 
-== Installation Quick Reference
+== Installation quick reference
 
 Before we start exploring each tool's syntax and capabilities, I recommend installing them so you can experiment and follow along with the examples.
 
