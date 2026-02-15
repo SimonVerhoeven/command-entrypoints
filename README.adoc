@@ -687,7 +687,7 @@ tasks:
 
 === Mise
 
-By 2026, the industry is consolidating around fewer, more powerful tools. The "works on my machine" problem has shifted from locally installed software, thanks to tools such as Docker, to developer toolchains themselves. While many developers have spent years juggling `nvm` for Node, `pyenv` for Python, `sdkman` for Java, and `direnv` for secrets, **Mise** (formerly `rtx`) has emerged as the "one tool to rule them all." It is a polyglot tool version manager, environment manager, and task runner all bundled into a single, high-performance Rust binary.[2, 10]
+In 2026, the industry is consolidating around fewer, more powerful tools. The "works on my machine" problem has shifted from locally installed software, thanks to tools such as Docker, to developer toolchains themselves. While many developers have spent years juggling `nvm` for Node, `pyenv` for Python, `sdkman` for Java, and `direnv` for secrets, **Mise** (formerly `rtx`) has emerged as the "one tool to rule them all." It is a polyglot tool version manager, environment manager, and task runner all bundled into a single, high-performance Rust binary.[2, 10]
 
 Mise’s most compelling argument is that it eliminates "tooling sprawl." Instead of having four different configuration files to set up a microservice, you have one `mise.toml` that ensures the correct JDK, Node version, and database credentials are all "en place" the moment you `cd` into the directory.
 
@@ -720,11 +720,11 @@ docker-compose up -d
 * ✅ **Integrated lifecycle:** It manages tool installation, environment variables, and task execution in a single workflow. If a developer runs a task, Mise installs any missing JDKs or runtimes automatically.
 * ✅ **Security-first:** Includes native integration with **sops** and **age** for managing encrypted secrets within your repository.
 * ✅ **Parallel execution:** Mise tasks can run in parallel by default, which is a significant speedup for monorepos.
+* ✅ **Ecosystem:** ability to leverage a large set of tools via its multiple https://mise.jdx.dev/dev-tools/backends/[backends]
 
 *Cons:*
 
-* ❌ **Learning curve:** The "hierarchical configuration" can be confusing for teams new to the tool.[2]
-* ❌ **Ecosystem size:** While compatible with all `asdf` plugins, its native plugin library is still growing.
+* ❌ **Learning curve:** The "hierarchical configuration" can be confusing for teams new to the tool.
 * ❌ **Windows nuances:** Although it supports Windows, features like automatic PATH modification require PowerShell profile setup, and WSL2 is recommended for the best experience.
 
 === JBang
