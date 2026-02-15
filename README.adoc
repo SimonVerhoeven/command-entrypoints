@@ -16,9 +16,10 @@ v1.0, 2026-02-01
 :stem:
 :xrefstyle: short
 :experimental:
-:description: A comprehensive comparison of modern command runners (Make, Just, Task, Mise, JBang, Gradle) for Java developers, with practical examples and recommendations.
+:description: A comparison of modern command runners (Make, Just, Task, Mise, JBang, Gradle) for Java developers, with practical examples and recommendations.
 :keywords: command runners, make, just, taskfile, mise, jbang, gradle, java, devops, automation
 :copyright: Copyright (c) 2026 Simon Verhoeven
+:docfooter: {copyright} - Licensed under {license}
 :license: MIT License
 :license-url: https://opensource.org/licenses/MIT
 
@@ -140,24 +141,24 @@ This is where command runners shine: keep scripts for complexity, and provide a 
 
 I recommend a simple rule of thumb:
 
-*Use scripts for isolated tasks.  
+*Use scripts for isolated tasks.
 Adopt a command runner once scripts become a system.*
 
 === What about just using Shell scripts?
 
 Raw shell scripts in a `scripts/` directory seem simple, but they have significant drawbacks:
 
-* There's no discoverability. How do you know what scripts exist? 
-* Each script needs its own `--help` documentation. 
-* Expressing dependencies between scripts can be a hassle. 
+* There's no discoverability. How do you know what scripts exist?
+* Each script needs its own `--help` documentation.
+* Expressing dependencies between scripts can be a hassle.
 * Parameter handling is inconsistent.
-* Shell scripts don't run natively on all platforms. 
+* Shell scripts don't run natively on all platforms.
 * Each script becomes a standalone item, and changes often don't cascade.
 
 Command runners solve these problems with:
 
 * built-in discovery (`just --list`).
-* consistent parameter handling 
+* consistent parameter handling
 * clear dependency syntax (`task-b: task-a`)
 * cross-platform support, and centralised maintenance in one or a few well-known files.
 
@@ -316,7 +317,7 @@ This comparison focuses on the most relevant options for Java development enviro
 
 . *Make* - A build automation tool with widespread adoption for command running
 . *Just* - Purpose-built command runner with modern syntax
-. *Task (Taskfile)* - YAML-based command runner built with Go. 
+. *Task (Taskfile)* - YAML-based command runner built with Go.
 . *Mise* - Polyglot tool manager and integrated command runner
 . *JBang* - Java-based scripting tool for task automation
 . *Gradle* - Build automation system with extensible task support
@@ -333,7 +334,7 @@ Before we start exploring each tool's syntax and capabilities, I recommend insta
 
 *Unix/Linux/macOS*: Usually pre-installed
 
-*Windows*: 
+*Windows*:
 [source,bash]
 ----
 # Option 1: Download standalone binary
@@ -470,7 +471,7 @@ No separate installation is needed; you merely need to ensure that you have JDK 
 
 == Syntax and developer experience
 
-The choice of a command runner often comes down to developer experience: how intuitive the syntax is, how quickly you can get started, and how easy it is to maintain over time. In this section, we'll examine the syntax and practical usability of each tool through equivalent examples. 
+The choice of a command runner often comes down to developer experience: how intuitive the syntax is, how quickly you can get started, and how easy it is to maintain over time. In this section, we'll examine the syntax and practical usability of each tool through equivalent examples.
 
 Each example implements the same set of commands:
 
@@ -542,7 +543,7 @@ Just is a purpose-built command runner that optimises for readability and a smoo
 [source,just]
 ----
 # justfile
-# AI Hint: This file is Model Context Protocol (MCP) optimised. 
+# AI Hint: This file is Model Context Protocol (MCP) optimised.
 # AI agents should use `just --list` to discover available tools.
 
 set dotenv-load := true
@@ -551,7 +552,7 @@ set dotenv-load := true
 environment := env('ENVIRONMENT', 'dev')
 service     := env('SERVICE', 'core-api')
 
-# Sets the fallback recipe (Supported in version 1.43.0+) 
+# Sets the fallback recipe (Supported in version 1.43.0+)
 [default]
 list:
     @just --list
@@ -573,12 +574,12 @@ deploy env=environment: test
     @echo "Fetching ephemeral credentials and deploying to {{env}}..."
     infisical run -- ./scripts/deploy.sh {{env}}
 
-# Per-recipe environment variables using the '$' parameter prefix 
+# Per-recipe environment variables using the '$' parameter prefix
 check-status $LOG_LEVEL="warn":
     @echo "Checking status for {{service}} with LOG_LEVEL=$LOG_LEVEL..."
     ./scripts/check.sh
 
-# Use the [script] attribute, which was stabilised in late 2025 (Version 1.44.0) 
+# Use the [script] attribute, which was stabilised in late 2025 (Version 1.44.0)
 [script("python3")]
 analyze-logs:
     import os
@@ -702,12 +703,12 @@ terraform = "1.7"          # Replaces tfenv
 [env]
 # Replaces direnv/dotenv
 DATABASE_URL = "postgresql://localhost:5432/myapp"
-# 2026: Native support for encrypted secrets via sops 
+# 2026: Native support for encrypted secrets via sops
 _.file = ".env.secrets.json"
 
 [tasks.dev]
 description = "Start local development environment"
-# Tasks automatically run with the tools and env defined above 
+# Tasks automatically run with the tools and env defined above
 run = """
 docker-compose up -d
 ./gradlew bootRun
@@ -994,10 +995,10 @@ void test() throws Exception {
 
 void deploy(String environment) throws Exception {
     System.out.println("Deploying to " + environment);
-    
+
     // Run tests first
     test();
-    
+
     var process = new ProcessBuilder("./scripts/deploy.sh", environment).start();
     process.waitFor();
 }
@@ -1010,14 +1011,14 @@ void integrationTest(String service) throws Exception {
 
 void dev() throws Exception {
     System.out.println("Start local development environment");
-    
+
     // Clean first
     clean();
-    
+
     // Start docker-compose
     var dockerProcess = new ProcessBuilder("docker-compose", "up", "-d", "postgres", "redis").start();
     dockerProcess.waitFor();
-    
+
     // Start the application
     var bootProcess = new ProcessBuilder("./gradlew", "bootRun").start();
     bootProcess.waitFor();
@@ -1051,7 +1052,7 @@ jshell> deploy("staging")
 
 == Cross-platform compatibility
 
-As a software engineer, you'll likely work with teams where members use different operating systems. 
+As a software engineer, you'll likely work with teams where members use different operating systems.
 Cross-platform compatibility and ease of set-up across different environments are important considerations when choosing a command runner.
 
 
@@ -1069,7 +1070,7 @@ Cross-platform compatibility and ease of set-up across different environments ar
 |✅ Excellent support; written in Go, compiles to single binary, handles shell differences gracefully
 
 |*Mise*
-|✅ Native Rust binary; handles Windows paths via shims or activation 
+|✅ Native Rust binary; handles Windows paths via shims or activation
 
 |*JBang*
 |✅ Java's "write once, run anywhere" promise (requires JDK)
@@ -1109,7 +1110,7 @@ Beyond technical capabilities, the success of a command runner depends on how ea
 
 *Mise*:
 
-* ✅ High Return on Investment: Replaces multiple tool managers like nvm, pyenv, and sdkman 
+* ✅ High Return on Investment: Replaces multiple tool managers like nvm, pyenv, and sdkman
 * ✅ Performance: Near-zero overhead as it modifies PATH directly rather than using slow shims
 * ❌ Complexity: The hierarchical merging of configurations (global vs. local) requires a clear team strategy
 * ❌ Windows support: While much improved in 2026, it still requires more set-up than a simple binary like Just
@@ -1253,7 +1254,7 @@ For example, the following `# AI Hint` signals to agents that tasks are discover
 [source,just]
 ----
 # justfile
-# AI Hint: This file is Model Context Protocol (MCP) optimised. 
+# AI Hint: This file is Model Context Protocol (MCP) optimised.
 # AI agents should use `just --list` to discover available tools.
 ----
 
@@ -1389,3 +1390,11 @@ This article is accompanied by a practical demonstration repository containing w
 * https://www.jbang.dev/[JBang - Scripting for Java]
 * https://gradle.org/[Gradle Build Tool]
 * https://picocli.info/[Picocli - A mighty tiny command line interface]
+
+'''
+
+[width="100%", cols="1", frame=top, grid=none]
+|===
+^| © 2026 Simon Verhoeven. Licensed under the MIT License. +
+_Last updated: February 15, 2026_
+|===
