@@ -95,7 +95,7 @@ They don't need to hunt through documentation, ask teammates basic questions, or
 === The "Command Runner" mental model
 
 Think of command runners as the *friendly interface* to your project. +
-They don't replace your other tools—they *orchestrate* them:
+They don't replace your other tools, they *orchestrate* them:
 
 ----
 Developer → command runner → Build tools (Gradle/Maven)
@@ -1220,7 +1220,7 @@ Make remains relevant for its universality and file dependency tracking, but unl
 * Use *JBang* (or equivalent in your language) for tasks that need programming logic
 * Don't try to make one tool do everything
 
-Your `justfile` or `Taskfile.yml` should be the friendly entry point to your project—the place where a new team member runs `just --list` or `task --list` and immediately sees how to build, test, and run the application. That clarity is worth far more than shaving 50ms off execution time or avoiding a simple tool installation.
+Your `justfile` or `Taskfile.yml` should be the friendly entry point to your project, they're the place where a new team member runs `just --list` or `task --list` and immediately sees how to build, test, and run the application. That clarity is worth far more than shaving 50ms off execution time or avoiding a simple tool installation.
 
 '''
 
@@ -1247,7 +1247,7 @@ The Model Context Protocol is emerging as a standard interface connecting LLMs t
 
 * **Token efficiency**: Agents interact with task names and schemas rather than reading entire script implementations
 * **Structured discovery**: Tools like `just-mcp` allow agents to query available commands (`/just:list-recipes`) without manual parsing
-* **Bidirectional capabilities**: Modern MCP servers support "sampling," where the task runner itself can query the LLM mid-execution—such as asking "Does this migration look safe?" before applying database changes
+* **Bidirectional capabilities**: Modern MCP servers support "sampling," where the task runner itself can query the LLM mid-execution, such as asking "Does this migration look safe?" before applying database changes
 
 For example, the following `# AI Hint` signals to agents that tasks are discoverable via `just --list`:
 
@@ -1324,7 +1324,7 @@ infisical run --env AGENT_SECRET -- \
   just deploy --identity-header "X-Agent: $AGENT_ID; X-Operator: $HUMAN_OPERATOR"
 ----
 
-**The bottom line**: Make AI assistance productive while maintaining the safety boundaries required for production systems. Your task runner becomes the control plane for both human and agentic workflows—discoverable, auditable, and secure by design. Whether AI agents are executing tasks today or five years from now, the principles of good design remain the same: clarity, structure, and appropriate constraints.
+**The bottom line**: Make AI assistance productive while maintaining the safety boundaries required for production systems. Your task runner becomes the control plane for both human and agentic workflows: discoverable, auditable, and secure by design. Whether AI agents are executing tasks today or five years from now, the principles of good design remain the same: clarity, structure, and appropriate constraints.
 
 '''
 
@@ -1335,9 +1335,9 @@ Mise includes first‑class support for encrypted env files via **SOPS** + **AGE
 * **SOPS (Secrets OPerationS)** is Mozilla’s encryption tool for structured config files. It lets you keep JSON, YAML, or TOML files encrypted *in place* while still being diffable and version‑controlled.
 * **AGE** is a modern, minimalist encryption tool designed as a simpler, safer alternative to GPG. It provides the key format that is used by SOPS for encryption and decryption.
 
-With Mise, you can store encrypted `.env.json`, `.env.yaml`, or `.env.toml` files directly in the repo. Mise decrypts them automatically when tasks run—provided the correct AGE private key is available (via `MISE_SOPS_AGE_KEY` or a local key file).
+With Mise, you can store encrypted `.env.json`, `.env.yaml`, or `.env.toml` files directly in the repo. Mise decrypts them automatically when tasks run, provided the correct AGE private key is available (via `MISE_SOPS_AGE_KEY` or a local key file).
 
-The result is *security without friction*: developers get secrets injected automatically, and workflows stay fast. Mise uses a high‑performance decryptor by default (via `rops`), so secret loading feels instant in day‑to‑day work. You can also enable log redaction (`redact = true` in the `env._.file` config) to avoid accidental leakage in CI or shared terminals—an underrated but critical safety net for modern teams.
+The result is *security without friction*: developers get secrets injected automatically, and workflows stay fast. Mise uses a high‑performance decryptor by default (via `rops`), so secret loading feels instant in day‑to‑day work. You can also enable log redaction (`redact = true` in the `env._.file` config) to avoid accidental leakage in CI or shared terminals, which is an underrated but critical safety net for modern teams.
 
 ---
 
